@@ -1,19 +1,22 @@
-import "./App.css";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import ContactIndex from "./components/Pages/Contact/ContactIndex";
 import TestimonialsIndex from "./components/Pages/Testimonials/TestimonialsIndex";
 import AboutIndex from "./components/Pages/About/AboutIndex";
 import GalleryIndex from "./components/Pages/Gallery/GalleryIndex";
+import HomeIndex from "./components/Pages/Home/HomeIndex";
+import Navbar from "./components/layout/NavBar";
 
 function App() {
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         {/* Home */}
         <Route
           path="/"
-          element={<Navigate to="/about" replace />}
+          element={<HomeIndex />}
         />
 
         {/* Contact */}
