@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const GalleryHero = () => {
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -39,7 +39,7 @@ const GalleryHero = () => {
       >
         <Typography
           component="button"
-        //   onClick={() => navigate("/collection")}
+          onClick={() => navigate("/")}
           sx={{
             border: 0,
             background: "transparent",
@@ -67,7 +67,7 @@ const GalleryHero = () => {
             },
           }}
         >
-          Antolini Collection
+         HOME
         </Typography>
         {/* SLASH */}
         <Typography
@@ -103,14 +103,9 @@ const GalleryHero = () => {
             whiteSpace: "nowrap",
           }}
         >
-          Exclusive Collection
+          GALLERY
         </Typography>
       </Box>
-
-      {/* =========================================
-          HERO
-      ========================================= */}
-
       <Box
         sx={{
           position: "relative",
@@ -128,7 +123,7 @@ const GalleryHero = () => {
       >
         <Box
           component="img"
-          src="/images/gallery/thumb.jpg"
+          src="/Home/tajmahal-banner.jpg"
           alt="Exclusive Collection"
           sx={{
             display: "block",
@@ -141,27 +136,15 @@ const GalleryHero = () => {
             padding: 0,
           }}
         />
-
-        {/* =========================================
-            OVERLAY
-        ========================================= */}
-
         <Box
           sx={{
             position: "absolute",
-
             inset: 0,
-
             background:
-              "linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02) 60%, rgba(0,0,0,0.08))",
-
+              "linear-gradient(90deg, rgba(0,0,0,1.08), rgba(0,0,0,0.12) 60%, rgba(0,0,0,1.08))",
             pointerEvents: "none",
           }}
         />
-
-        {/* =========================================
-            TITLE
-        ========================================= */}
 
         <Typography
           component="h1"
@@ -192,69 +175,50 @@ const GalleryHero = () => {
               md: "52px",
               lg: "58px",
             },
-
             fontWeight: 400,
-
             lineHeight: 1.1,
-
             letterSpacing: {
               xs: "0.5px",
               md: "1.5px",
             },
-
             whiteSpace: "nowrap",
-
             textShadow:
               "0 1px 8px rgba(0,0,0,0.2)",
           }}
         >
           Exclusive Collection
         </Typography>
-
-        {/* =========================================
-            MATERIAL
-        ========================================= */}
-
-        <Typography
+        {/* <Typography
           component="p"
           sx={{
             position: "absolute",
-
             right: {
               xs: "16px",
               sm: "25px",
               md: "35px",
             },
-
             bottom: {
               xs: "12px",
               sm: "16px",
               md: "18px",
             },
-
             margin: 0,
-
             color: "#fff",
-
             fontFamily:
               "Arial, sans-serif",
-
             fontSize: {
               xs: "9px",
               sm: "11px",
               md: "13px",
             },
-
             fontWeight: 400,
-
             whiteSpace: "nowrap",
-
             textShadow:
               "0 1px 5px rgba(0,0,0,0.4)",
           }}
         >
           Material: Amazonite®
-        </Typography>
+        </Typography> */}
       </Box>
     </Box>
   );
