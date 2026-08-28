@@ -5,13 +5,13 @@ import TestimonialsIndex from "./components/Pages/Testimonials/TestimonialsIndex
 import AboutIndex from "./components/Pages/About/AboutIndex";
 import GalleryIndex from "./components/Pages/Gallery/GalleryIndex";
 import HomeIndex from "./components/Pages/Home/HomeIndex";
-import MainLayout from "./components/Layout/MainLayout";
+// import MainLayout from "./components/Layout/MainLayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainLayout/>}>
+        {/* <Route element={<MainLayout/>}> */}
           {/* Home */}
           <Route path="/" element={<HomeIndex />} />
 
@@ -29,7 +29,7 @@ function App() {
 
           {/* 404 */}
           <Route path="*" element={<Navigate to="/contact" replace />} />
-        </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );
