@@ -30,7 +30,7 @@ function App() {
 
           <Route
             path="/about"
-            element={<AboutIndex />}
+            element={<AboutIndex />} 
           />
 
           <Route
