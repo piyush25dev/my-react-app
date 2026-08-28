@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainLayout />}>
+        <Route element={<MainLayout/>}>
           {/* Home */}
           <Route path="/" element={<HomeIndex />} />
 
