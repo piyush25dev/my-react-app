@@ -92,14 +92,14 @@ const ContactHero = () => {
       >
         <Box
           component="img"
-          src="/images/gallery/thumb.jpg"
+          src="/images/about/group.png"
           alt="Exclusive Collection"
           sx={{
             display: "block",
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "top",
             maxWidth: "none",
             margin: 0,
             padding: 0,
