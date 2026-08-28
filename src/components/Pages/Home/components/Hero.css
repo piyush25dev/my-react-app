@@ -1,15 +1,87 @@
+/* Segmented progress loader (Instagram-stories style) */
+.progress-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  gap: 0;
+}
+
+.progress-segment {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+}
+
+.progress-fill-full {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+.progress-fill-active {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  animation-name: slide-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Hero slider images: simple fade only, no zoom/scale */
+.slide-img-wrapper {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.slide-active {
+  opacity: 1;
+}
+
+.slide-inactive {
+  opacity: 0;
+}
+
+/* Ken Burns wrapper: clips zoom so image never exceeds its section's fixed size */
+.kenburns-wrapper {
+  overflow: hidden;
+}
+
+.kenburns-zoom {
+  animation: kenburns-zoom 18s ease-in-out infinite;
+}
+
 @keyframes kenburns-zoom {
   0% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.15);
+    transform: scale(1.10);
   }
   100% {
     transform: scale(1);
   }
-}
-
-.kenburns-zoom {
-  animation: kenburns-zoom 18s ease-in-out infinite;
 }
