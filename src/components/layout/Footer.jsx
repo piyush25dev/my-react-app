@@ -7,7 +7,7 @@ const Footer = () => {
           <img
             src="/2016-07-09.png"
             alt="Vaastu"
-            className="w-[140px] h-auto object-contain"
+            className="w-35 h-auto object-contain"
           />
         </div>
 
