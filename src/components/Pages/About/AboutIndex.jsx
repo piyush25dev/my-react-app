@@ -36,6 +36,7 @@ const AboutIndex = () => {
           },
 
           whiteSpace: "nowrap",
+          mb: -10
         }}
       >
         <Typography
