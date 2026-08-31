@@ -5,7 +5,7 @@ const SuccessStory = ({
   title = "A company success story",
   description = `The story of Antolini Luigi® & C. stretches back over 60 years.
 The company has been at the forefront of developments in natural stone processing and new technologies, constantly evolving along the way and never overlooking the importance of quality.`,
-  image = "/images/about/girish.jpg",
+  image = "/images/about/girish.png",
 }) => {
   return (
     <Box
@@ -13,12 +13,12 @@ The company has been at the forefront of developments in natural stone processin
         width: "100%",
         backgroundColor: "#fff",
         overflow: "hidden",
-        mb: {xs: 4, md: 0}
+        mb: { xs: 4, md: 0 },
       }}
     >
       <Box
         sx={{
-          position: {xs: "unset", md: "relative"},
+          position: { xs: "unset", md: "relative" },
           width: "100%",
           minHeight: "619px",
 
@@ -35,7 +35,7 @@ The company has been at the forefront of developments in natural stone processin
 
         <Box
           sx={{
-            position: {xs: "unset", md: "absolute"},
+            position: { xs: "unset", md: "absolute" },
 
             left: "13.8%",
             top: "50%",
@@ -89,7 +89,7 @@ The company has been at the forefront of developments in natural stone processin
                 fontSize: "9px",
                 mb: "16px",
                 letterSpacing: "0.5px",
-                p: 2
+                p: 2,
               },
             }}
           >
@@ -113,7 +113,7 @@ The company has been at the forefront of developments in natural stone processin
               "@media (max-width: 480px)": {
                 fontSize: "18px",
                 mb: "2px",
-                p: 2
+                p: 2,
               },
             }}
           >
@@ -154,7 +154,7 @@ The company has been at the forefront of developments in natural stone processin
               "@media (max-width: 480px)": {
                 fontSize: "13px",
                 lineHeight: 1.45,
-                p: 2
+                p: 2,
               },
             }}
           >

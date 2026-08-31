@@ -85,3 +85,52 @@
     transform: scale(1);
   }
 }
+
+/* --- Page-wide side dot indicator, add into Hero.css ---
+   Tracks which SECTION of the page is currently in view (Hero, Section-1, ...)
+   Fixed to the viewport so it stays visible while the whole page scrolls. */
+
+.page-side-track {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  z-index: 50;
+}
+
+.page-side-dash {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: rgba(20, 20, 20, 0.55);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.page-side-dash:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.page-side-dash.active {
+  background: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 767px) {
+  .page-side-track {
+    right: 10px;
+    gap: 11px;
+  }
+
+  .page-side-dash {
+    width: 6px;
+    height: 6px;
+  }
+}
