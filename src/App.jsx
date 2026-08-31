@@ -12,6 +12,10 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useEffect } from "react";
+import ProductIndex from "./components/Pages/Products/ProductIndex";
+import ExoticIndex from "./components/Pages/Exotic/ExoticIndex";
+import MinesIndex from "./components/Pages/Mines/MinesIndex";
+import ItalianMarbleApplications from "./components/Pages/Products/Applications/ItalianMarbleApplications";
 
 const pageTitles = {
   "/": "Home | VAASTU",
@@ -21,13 +25,14 @@ const pageTitles = {
   "/contact": "Contact | VAASTU",
   "/gallery": "Gallery | VAASTU",
   "/testimonials": "Testimonials | VAASTU",
+  "/mines": "MINES | VAASTU",
 };
 
 const PageTitle = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const title = pageTitles[location.pathname] || "Antolini";
+    const title = pageTitles[location.pathname] || "VAASTU";
 
     document.title = title;
   }, [location.pathname]);
@@ -45,6 +50,19 @@ function App() {
           <Route path="/" element={<HomeIndex />} />
 
           <Route path="/contact" element={<ContactIndex />} />
+          {/* Products */}
+          <Route path="/products/indian-marbles" element={<ProductIndex />} />
+          <Route path="/products/italian-marbles" element={<ProductIndex />} />
+          <Route path="/products/indian-granite" element={<ProductIndex />} />
+          <Route path="/products/italian-granite" element={<ProductIndex />} />
+          <Route path="/application-of-italian-marble" element={<ItalianMarbleApplications />} />
+          {/* Exotic */}
+          <Route path="/exotic/antico-gold" element={<ExoticIndex />} />
+          <Route path="/exotic/alaska-white" element={<ExoticIndex />} />
+
+
+          <Route path="/mines" element={<MinesIndex />} />
+
 
           <Route path="/testimonials" element={<TestimonialsIndex />} />
 

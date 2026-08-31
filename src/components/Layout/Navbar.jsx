@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Search, ChevronDown, Menu } from "lucide-react";
+import { navLinks, submenuData } from "../Data/NavData"
 
 const TRANSITION = "duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const location = useLocation();
-
-  // Check if current page is Home
   const isHomePage = location.pathname === "/";
+
+  // Detect mobile screen
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    // Check initial scroll position
     handleScroll();
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -30,15 +39,8 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setActiveSubmenu(null);
   };
-
-  const navLinks = [
-    { label: "HOME", to: "/" },
-    { label: "ABOUT US", to: "/about" },
-    { label: "TESTIMONIALS", to: "/testimonials" },
-    { label: "GALLERY", to: "/gallery" },
-    { label: "CONTACT US", to: "/contact" },
-  ];
 
   const shouldHaveWhiteBackground = !isHomePage || isScrolled || menuOpen;
 
@@ -53,12 +55,14 @@ const Navbar = () => {
             : "bg-transparent text-white"
         }
       `}
-      onMouseLeave={closeMenu}
+      onMouseLeave={() => {
+        // Close everything when mouse leaves the header (desktop only)
+        if (!isMobile) {
+          closeMenu();
+        }
+      }}
     >
-      {/* ==============================
-          TOP ROW
-      ============================== */}
-
+      {/* Top row */}
       <div
         className="
           relative z-20
@@ -88,10 +92,13 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* MENU BUTTON */}
+        {/* Menu Button */}
         <button
           type="button"
-          onClick={() => setMenuOpen((prev) => !prev)}
+          onClick={() => {
+            setMenuOpen((prev) => !prev);
+            setActiveSubmenu(null);
+          }}
           className={`
             flex cursor-pointer
             items-center gap-2
@@ -108,28 +115,33 @@ const Navbar = () => {
               ${menuOpen ? "rotate-90" : "rotate-0"}
             `}
           />
-
           <span className="text-xs tracking-widest">MENU</span>
         </button>
       </div>
 
-      {/* ==============================
-          DROPDOWN PANEL
-      ============================== */}
-
+      {/* Dropdown panel */}
       <div
         className={`
           absolute left-0 top-full z-10
-          w-full overflow-hidden
+          w-full overflow-y-auto overflow-x-hidden
           bg-white shadow-lg
           transition-all ${TRANSITION}
 
           ${
             menuOpen
-              ? "max-h-175 border-t border-neutral-100 opacity-100"
+              ? "border-t border-neutral-100 opacity-100"
               : "max-h-0 opacity-0"
           }
         `}
+        style={{
+          maxHeight: menuOpen ? "calc(100vh - 88px)" : "0",
+        }}
+        onMouseLeave={() => {
+          // Close submenu when mouse leaves the dropdown (desktop only)
+          if (!isMobile) {
+            setActiveSubmenu(null);
+          }
+        }}
       >
         <div
           className={`
@@ -144,10 +156,7 @@ const Navbar = () => {
             paddingBottom: "48px",
           }}
         >
-          {/* ==============================
-              UTILITY ROW
-          ============================== */}
-
+          {/* Utility row */}
           <div
             className="
               mb-4
@@ -173,9 +182,9 @@ const Navbar = () => {
             {/* SEARCH */}
             <div className="flex items-center gap-2 text-neutral-600">
               <Search size={18} className="cursor-pointer" />
-
               <span className="md:hidden">SEARCH</span>
-            </div>  
+            </div>
+
             {/* CONTACT */}
             <Link
               to="/contact"
@@ -184,7 +193,9 @@ const Navbar = () => {
             >
               CONTACT US
             </Link>
+
             <span className="hidden text-neutral-300 md:inline">|</span>
+
             {/* LANGUAGE */}
             <span className="flex items-center gap-1">
               ENG
@@ -192,10 +203,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* ==============================
-              MAIN NAVIGATION
-          ============================== */}
-
+          {/* Main Navigation */}
           <nav
             className="
               flex flex-col
@@ -209,37 +217,246 @@ const Navbar = () => {
               md:gap-8
             "
           >
-            {navLinks.map(({ label, to }, i) => (
-              <Link
+            {navLinks.map(({ label, to, hasSubmenu }) => (
+              <div
                 key={label}
-                to={to}
-                onClick={closeMenu}
-                className={`
-                  w-full
-                  border-b border-neutral-100
-                  py-3.5
-
-                  text-[15px]
-                  font-medium
-                  tracking-[0.15em]
-                  text-neutral-900
-
-                  transition-opacity
-                  hover:opacity-50
-
-                  md:w-auto
-                  md:border-b-0
-                  md:py-0
-                  md:text-[14px]
-                  md:text-neutral-800
-
-                  ${i === navLinks.length - 1 ? "max-md:border-b-0" : ""}
-                `}
+                className="w-full md:w-auto"
+                onMouseEnter={() => {
+                  if (!isMobile) {
+                    // Close submenu when hovering over non-submenu items
+                    if (hasSubmenu) {
+                      setActiveSubmenu(label);
+                    } else {
+                      setActiveSubmenu(null);
+                    }
+                  }
+                }}
               >
-                {label}
-              </Link>
+                {hasSubmenu ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (isMobile) {
+                        setActiveSubmenu(
+                          activeSubmenu === label ? null : label
+                        );
+                      }
+                    }}
+                    className="
+                      group
+                      flex
+                      w-full
+                      items-center
+                      justify-between
+
+                      border-b border-neutral-100
+                      bg-transparent
+                      py-3.5
+
+                      text-[15px]
+                      font-medium
+                      tracking-[0.15em]
+                      text-neutral-900
+
+                      transition-opacity
+                      hover:opacity-50
+
+                      md:w-auto
+                      md:justify-center
+                      md:border-b-0
+                      md:py-0
+                      md:text-[14px]
+                      md:text-neutral-800
+
+                      cursor-pointer
+                    "
+                  >
+                    <span>{label}</span>
+                    <ChevronDown
+                      size={14}
+                      className={`
+                        ml-2
+                        transition-transform
+                        duration-300
+
+                        md:hidden
+
+                        ${activeSubmenu === label ? "rotate-180" : ""}
+                      `}
+                    />
+                  </button>
+                ) : (
+                  <Link
+                    to={to}
+                    onClick={closeMenu}
+                    className="
+                      flex
+                      w-full
+                      items-center
+
+                      border-b border-neutral-100
+                      py-3.5
+
+                      text-[15px]
+                      font-medium
+                      tracking-[0.15em]
+                      text-neutral-900
+
+                      transition-opacity
+                      hover:opacity-50
+
+                      md:w-auto
+                      md:justify-center
+                      md:border-b-0
+                      md:py-0
+                      md:text-[14px]
+                      md:text-neutral-800
+                    "
+                  >
+                    {label}
+                  </Link>
+                )}
+
+                {/* Mobile submenu */}
+                {hasSubmenu && activeSubmenu === label && (
+                  <div
+                    className="
+                      block
+                      border-b
+                      border-neutral-100
+                      bg-neutral-50
+
+                      md:hidden
+                    "
+                  >
+                    {submenuData[label]?.columns.map((column) => (
+                      <div key={column.title} className="px-4 py-4">
+                        <p
+                          className="
+                            mb-2
+                            text-[11px]
+                            font-medium
+                            tracking-[0.15em]
+                            text-neutral-500
+                          "
+                        >
+                          {column.title}
+                        </p>
+                        <div className="flex flex-col">
+                          {column.items.map((item) => (
+                            <Link
+                              key={item.label}
+                              to={item.to}
+                              onClick={closeMenu}
+                              className="
+                                py-1.5
+                                text-[14px]
+                                tracking-wide
+                                text-neutral-700
+                                transition-opacity
+                                hover:opacity-50
+                              "
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
+
+          {/* Desktop submenu */}
+          <div
+            className={`
+              hidden
+              overflow-hidden
+              transition-all
+              duration-300
+              md:block
+
+              ${
+                activeSubmenu
+                  ? "max-h-[500px] opacity-100"
+                  : "max-h-0 opacity-0"
+              }
+            `}
+            onMouseEnter={() => {
+              if (activeSubmenu && !isMobile) {
+                setActiveSubmenu(activeSubmenu);
+              }
+            }}
+          >
+            {activeSubmenu && submenuData[activeSubmenu] && (
+              <div
+                className="
+                  mt-6
+                  border-t
+                  border-neutral-100
+                  bg-white
+
+                  px-10
+                  pb-12
+                  pt-8
+
+                  lg:px-16
+                "
+              >
+                <div
+                  className="
+                    grid
+                    grid-cols-2
+                    gap-x-20
+                    gap-y-8
+
+                    lg:grid-cols-4
+                  "
+                >
+                  {submenuData[activeSubmenu].columns.map((column) => (
+                    <div key={column.title}>
+                      <p
+                        className="
+                          mb-5
+                          text-[12px]
+                          font-medium
+                          uppercase
+                          tracking-[0.18em]
+                          text-neutral-500
+                        "
+                      >
+                        {column.title}
+                      </p>
+                      <div className="flex flex-col gap-4">
+                        {column.items.map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.to}
+                            onClick={closeMenu}
+                            className="
+                              w-fit
+                              text-[17px]
+                              font-normal
+                              tracking-wide
+                              text-[#a4866e]
+                              transition-all
+                              duration-200
+                              hover:translate-x-1
+                              hover:text-[#806c5d]
+                            "
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

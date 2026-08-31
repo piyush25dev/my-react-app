@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "./Hero.css";
 
 const SLIDE_DURATION = 5000; // ms — keep in sync with the interval below
@@ -160,8 +160,8 @@ function Hero() {
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Hero-image/12.png"
-            alt="Antolini StonerRoom"
+            src="/Home/antico-slider.jpg"
+            alt="Vaastu StonerRoom"
             className="kenburns-zoom h-full w-full object-cover"
           />
         </div>
@@ -179,8 +179,8 @@ function Hero() {
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Hero-image/10.png"
-            alt="Antolini StonerRoom"
+            src="/Home/antico-slider.jpg"
+            alt="Vaastu StonerRoom"
             className="kenburns-zoom h-full w-full object-cover"
           />
         </div>
