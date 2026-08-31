@@ -160,8 +160,8 @@ function Hero() {
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
-            alt="Vaastu StonerRoom"
+            src="/Hero-image/12.png"
+            alt="Antolini StonerRoom"
             className="kenburns-zoom h-full w-full object-cover"
           />
         </div>
@@ -179,8 +179,8 @@ function Hero() {
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
-            alt="Vaastu StonerRoom"
+            src="/Hero-image/10.png"
+            alt="Antolini StonerRoom"
             className="kenburns-zoom h-full w-full object-cover"
           />
         </div>
