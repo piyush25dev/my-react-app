@@ -37,11 +37,11 @@ const Navbar = () => {
     { label: "ABOUT US", to: "/about" },
     { label: "TESTIMONIALS", to: "/testimonials" },
     { label: "GALLERY", to: "/gallery" },
-    { label: "CONTACT US", to: "/contact-us" },
+    { label: "CONTACT US", to: "/contact" },
   ];
 
   const shouldHaveWhiteBackground =
-    !isHomePage || isScrolled || menuOpen;
+    !isHomePage || isScrolled || menuOpen; 
 
   return (
     <header
@@ -198,7 +198,7 @@ const Navbar = () => {
             </div>
             {/* CONTACT */}
             <Link
-              to="/contact-us"
+              to="/contact"
               onClick={closeMenu}
               className="hover:opacity-60"
             >
