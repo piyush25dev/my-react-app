@@ -18,7 +18,7 @@ const timelineData = [
   {
     id: 3,
     year: "1960-1980",
-    side: "right",
+    side: "left",
     description:
       "Over the following years, the company strengthens its position over the international markets and receives the first national Efibanca award, an official recognition of Antolini® high quality production standards as well as its significant financial success.",
     image: "/images/about/story1.jpg",
@@ -26,7 +26,7 @@ const timelineData = [
   {
     id: 4,
     year: "1988",
-    side: "left",
+    side: "right",
     description:
       "Three companies merge to form the Eurotrading firm, stretching over an area of 100,000 m².",
     image: "/images/about/story2.jpg",
