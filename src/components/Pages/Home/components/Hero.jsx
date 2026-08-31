@@ -24,7 +24,8 @@ function Hero() {
   return (
     <>
       {/* Hero Section */}
-      <main className="relative h-[60vh] w-full overflow-hidden md:h-[70vh]">
+
+      <main className="relative h-[60vh] w-full overflow-hidden md:h-[70vh] cursor-pointer">
         {/* Top segmented progress loader */}
         <div className="progress-loader">
           {slides.map((_, index) => (
@@ -58,7 +59,8 @@ function Hero() {
       </main>
 
       {/* Section - 1 */}
-      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661]">
+
+      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
             src="/Home/antico-slider.jpg"
@@ -71,7 +73,9 @@ function Hero() {
           <div className="text-white md:ml-[14.7%]">
             <h2 className="text-[22px] font-semibold tracking-[0.1em] md:text-[42px] md:tracking-[0.12em]">
               Example
-              <sup className="ml-1 align-super text-[10px] md:text-[11px]">®</sup>{" "}
+              <sup className="ml-1 align-super text-[10px] md:text-[11px]">
+                ®
+              </sup>{" "}
               Lorem, ipsum.
             </h2>
 
@@ -88,7 +92,8 @@ function Hero() {
       </section>
 
       {/* Section - 2 */}
-      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661]">
+
+      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
             src="/Home/antico-slider.jpg"
@@ -103,7 +108,8 @@ function Hero() {
       </section>
 
       {/* Section - 3 */}
-      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661]">
+
+      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
             src="/Home/antico-slider.jpg"
@@ -118,7 +124,8 @@ function Hero() {
       </section>
 
       {/* Section - 4 */}
-      <section className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661]">
+
+      <section className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
             src="/Home/antico-slider.jpg"
@@ -149,6 +156,7 @@ function Hero() {
       </section>
 
       {/* Section - 5 */}
+
       <section className="relative h-[35vh] w-full bg-black text-white md:h-[40vh]">
         {/* Heading */}
         <div className="absolute left-0 top-[50px] w-full px-4 text-center md:top-[90px]">
@@ -174,7 +182,8 @@ function Hero() {
       </section>
 
       {/* Section - 6 */}
-      <section className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661]">
+
+      <section className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
             src="/Home/antico-slider.jpg"

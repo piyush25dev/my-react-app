@@ -40,8 +40,7 @@ const Navbar = () => {
     { label: "CONTACT US", to: "/contact" },
   ];
 
-  const shouldHaveWhiteBackground =
-    !isHomePage || isScrolled || menuOpen; 
+  const shouldHaveWhiteBackground = !isHomePage || isScrolled || menuOpen;
 
   return (
     <header
@@ -97,11 +96,7 @@ const Navbar = () => {
             flex cursor-pointer
             items-center gap-2
             transition-colors ${TRANSITION}
-            ${
-              shouldHaveWhiteBackground
-                ? "text-black"
-                : "text-white"
-            }
+            ${shouldHaveWhiteBackground ? "text-black" : "text-white"}
           `}
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
@@ -110,17 +105,11 @@ const Navbar = () => {
             size={20}
             className={`
               transition-transform ${TRANSITION}
-              ${
-                menuOpen
-                  ? "rotate-90"
-                  : "rotate-0"
-              }
+              ${menuOpen ? "rotate-90" : "rotate-0"}
             `}
           />
 
-          <span className="text-xs tracking-widest">
-            MENU
-          </span>
+          <span className="text-xs tracking-widest">MENU</span>
         </button>
       </div>
 
@@ -147,11 +136,7 @@ const Navbar = () => {
             pt-5
             transition-transform ${TRANSITION}
 
-            ${
-              menuOpen
-                ? "translate-y-0"
-                : "-translate-y-3"
-            }
+            ${menuOpen ? "translate-y-0" : "-translate-y-3"}
           `}
           style={{
             paddingLeft: "24px",
@@ -187,15 +172,10 @@ const Navbar = () => {
           >
             {/* SEARCH */}
             <div className="flex items-center gap-2 text-neutral-600">
-              <Search
-                size={18}
-                className="cursor-pointer"
-              />
+              <Search size={18} className="cursor-pointer" />
 
-              <span className="md:hidden">
-                SEARCH
-              </span>
-            </div>
+              <span className="md:hidden">SEARCH</span>
+            </div>  
             {/* CONTACT */}
             <Link
               to="/contact"
@@ -204,9 +184,7 @@ const Navbar = () => {
             >
               CONTACT US
             </Link>
-            <span className="hidden text-neutral-300 md:inline">
-              |
-            </span>
+            <span className="hidden text-neutral-300 md:inline">|</span>
             {/* LANGUAGE */}
             <span className="flex items-center gap-1">
               ENG
@@ -255,11 +233,7 @@ const Navbar = () => {
                   md:text-[14px]
                   md:text-neutral-800
 
-                  ${
-                    i === navLinks.length - 1
-                      ? "max-md:border-b-0"
-                      : ""
-                  }
+                  ${i === navLinks.length - 1 ? "max-md:border-b-0" : ""}
                 `}
               >
                 {label}
