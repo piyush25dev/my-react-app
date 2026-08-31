@@ -48,7 +48,7 @@ const TexturesCollection = () => {
         >
           <Box
             component="img"
-            src="/images/about/story2.jpg"
+            src="/Hero-image/05.png"
             alt="Antolini Textures+ Collection"
             sx={{
               position: "absolute",

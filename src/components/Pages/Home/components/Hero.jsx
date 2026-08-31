@@ -1,18 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Hero.css";
 
 const SLIDE_DURATION = 5000; // ms — keep in sync with the interval below
 
+// one entry per section on the page, in order — used to drive the side dots
+const SECTION_IDS = [
+  "hero",
+  "section-1",
+  "section-2",
+  "section-3",
+  "section-4",
+  "section-5",
+  "section-6",
+];
+
 function Hero() {
   const slides = [
-    "/Home/tajmahal-banner.jpg",
-    "/Home/antico-slider.jpg",
-    "/Home/stock.jpg",
-    "/Home/alaska-banner.jpg",
+    "/Hero-image/01.png",
+    "/Hero-image/03.png",
+    "/Hero-image/04.png",
+    "/Hero-image/00.png",
   ];
 
   const [current, setCurrent] = useState(0);
+  const [activeSection, setActiveSection] = useState(0);
 
+  // hero image autoplay (unchanged)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
@@ -21,13 +34,58 @@ function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  // track which section is on screen, to drive the side dots
+  useEffect(() => {
+    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      Boolean
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = SECTION_IDS.indexOf(entry.target.id);
+            if (idx !== -1) setActiveSection(idx);
+          }
+        });
+      },
+      {
+        // a section counts as "current" once it crosses the middle of the viewport
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (idx) => {
+    document.getElementById(SECTION_IDS[idx])?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
+      {/* Page-wide side dot indicator — tracks which section is in view */}
+      <div className="page-side-track">
+        {SECTION_IDS.map((id, index) => (
+          <button
+            key={id}
+            className={`page-side-dash ${index === activeSection ? "active" : ""}`}
+            onClick={() => scrollToSection(index)}
+            aria-label={`Go to ${id.replace("-", " ")}`}
+          />
+        ))}
+      </div>
+
       {/* Hero Section */}
 
-      <main className="relative h-[60vh] w-full overflow-hidden md:h-[70vh] cursor-pointer">
+      <main
+        id="hero"
+        className="relative h-[60vh] w-full overflow-hidden md:h-[70vh] cursor-pointer"
+      >
         {/* Top segmented progress loader */}
-        <div className="progress-loader">
+        <div className="progress-loader ">
           {slides.map((_, index) => (
             <div key={index} className="progress-segment">
               {index < current && <div className="progress-fill-full" />}
@@ -42,13 +100,13 @@ function Hero() {
           ))}
         </div>
 
-        <div className="relative h-full w-full">
+        <div className="relative h-full w-full object-cover">
           {slides.map((src, index) => (
             <div key={src} className="slide-img-wrapper">
               <img
                 src={src}
                 alt=""
-                className={`slide-img ${index === current ? "slide-active" : "slide-inactive"}`}
+                className={`slide-img ${index === current ? "slide-active" : "slide-inactive"} h-full w-full object-cover`}
               />
             </div>
           ))}
@@ -60,10 +118,13 @@ function Hero() {
 
       {/* Section - 1 */}
 
-      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
+      <section
+        id="section-1"
+        className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+      >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
+            src="/Hero-image/11.png"
             alt="Exclusive Collection"
             className="kenburns-zoom h-full w-full object-cover"
           />
@@ -93,10 +154,13 @@ function Hero() {
 
       {/* Section - 2 */}
 
-      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
+      <section
+        id="section-2"
+        className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+      >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
+            src="/Hero-image/12.png"
             alt="Antolini StonerRoom"
             className="kenburns-zoom h-full w-full object-cover"
           />
@@ -109,10 +173,13 @@ function Hero() {
 
       {/* Section - 3 */}
 
-      <section className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
+      <section
+        id="section-3"
+        className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+      >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
+            src="/Hero-image/10.png"
             alt="Antolini StonerRoom"
             className="kenburns-zoom h-full w-full object-cover"
           />
@@ -125,10 +192,13 @@ function Hero() {
 
       {/* Section - 4 */}
 
-      <section className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
+      <section
+        id="section-4"
+        className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+      >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
+            src="/Hero-image/07.png"
             alt="ZeroCare"
             className="kenburns-zoom h-full w-full object-cover"
           />
@@ -157,7 +227,10 @@ function Hero() {
 
       {/* Section - 5 */}
 
-      <section className="relative h-[35vh] w-full bg-black text-white md:h-[40vh]">
+      <section
+        id="section-5"
+        className="relative h-[35vh] w-full bg-black text-white md:h-[40vh]"
+      >
         {/* Heading */}
         <div className="absolute left-0 top-[50px] w-full px-4 text-center md:top-[90px]">
           <p className="text-[11px] font-normal tracking-[0.25em] md:text-[14px] md:tracking-[0.35em]">
@@ -183,10 +256,13 @@ function Hero() {
 
       {/* Section - 6 */}
 
-      <section className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer">
+      <section
+        id="section-6"
+        className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+      >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
-            src="/Home/antico-slider.jpg"
+            src="/Hero-image/09.png"
             alt="ZeroCare"
             className="kenburns-zoom h-full w-full object-cover"
           />

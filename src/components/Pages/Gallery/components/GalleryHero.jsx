@@ -123,7 +123,7 @@ const GalleryHero = () => {
       >
         <Box
           component="img"
-          src="/Home/tajmahal-banner.jpg"
+          src="/Hero-image/13.png"
           alt="Exclusive Collection"
           sx={{
             display: "block",
