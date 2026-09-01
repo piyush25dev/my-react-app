@@ -125,7 +125,7 @@ const ProductCard = ({ product, hasDescription }) => {
       <Dialog
         open={open}
         onClose={handleClose}
-        maxWidth="lg"
+        maxWidth="sm"
         fullWidth
         slotProps={{
           paper: {
