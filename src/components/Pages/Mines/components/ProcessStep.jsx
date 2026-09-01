@@ -16,8 +16,8 @@ const ProcessStep = ({ step, index }) => {
           md: "60px",
         },
         py: {
-          xs: "35px",
-          md: "50px",
+          xs: "15px",
+          md: "30px",
         },
         borderTop: index === 0 ? "1px solid #ddd" : "1px solid #ddd",
       }}

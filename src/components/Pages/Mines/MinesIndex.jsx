@@ -133,8 +133,8 @@ const MinesIndex = () => {
       <Box
         sx={{
           py: {
-            xs: "60px",
-            md: "100px",
+            xs: "20px",
+            md: "40px",
           },
         }}
       >
@@ -142,16 +142,12 @@ const MinesIndex = () => {
           <Typography
             sx={{
               textAlign: "center",
-
               fontFamily: "Arial, sans-serif",
-
               fontSize: {
                 xs: "16px",
                 md: "20px",
               },
-
               lineHeight: 1.8,
-
               color: "#5c6f82",
             }}
           >
@@ -161,26 +157,21 @@ const MinesIndex = () => {
           <Typography
             sx={{
               textAlign: "center",
-
               fontFamily: "Arial, sans-serif",
-
               fontSize: {
                 xs: "16px",
                 md: "20px",
               },
-
               lineHeight: 1.8,
-
               color: "#5c6f82",
-
               mt: "10px",
             }}
           >
             {minesData.intro.additionalDescription}
           </Typography>
         </Container>
-        <MinesSection />
       </Box>
+      <MinesSection />
 
       {/* ================= MINES ================= */}
 
@@ -191,8 +182,8 @@ const MinesIndex = () => {
       <Box
         sx={{
           py: {
-            xs: "65px",
-            md: "100px",
+            xs: "15px",
+            md: "40px",
           },
 
           backgroundColor: "#fff",
@@ -202,18 +193,13 @@ const MinesIndex = () => {
           <Typography
             sx={{
               fontFamily: "Arial, sans-serif",
-
               fontSize: {
                 xs: "28px",
                 md: "42px",
               },
-
               fontWeight: 400,
-
               color: "#181818",
-
               mb: "30px",
-
               textAlign: "center",
             }}
           >
