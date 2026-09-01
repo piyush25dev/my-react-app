@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { italianMarbles } from "../../../Data/ProductsData";
+import ProductCard from "../../../Custom/ProductCard";
 
 const ItalianMarbleApplications = () => {
   const navigate = useNavigate();
@@ -334,104 +335,7 @@ const ItalianMarbleApplications = () => {
           }}
         >
           {filteredProducts.map((product) => (
-            <Box
-              key={product.name}
-              sx={{
-                backgroundColor: "#fff",
-                p: {
-                  xs: "14px",
-                  sm: "16px",
-                  md: "20px",
-                },
-
-                transition:
-                  "transform 0.35s ease, box-shadow 0.35s ease",
-
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow:
-                    "0 12px 35px rgba(0,0,0,0.10)",
-                },
-              }}
-            >
-              {/* Product Image */}
-              <Box
-                sx={{
-                  width: "100%",
-                  aspectRatio: "1.55 / 1",
-                  overflow: "hidden",
-                  backgroundColor: "#eee",
-                }}
-              >
-                <Box
-                  component="img"
-                  src={product.image}
-                  alt={product.name}
-                  loading="lazy"
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    display: "block",
-                    objectFit: "cover",
-
-                    transition:
-                      "transform 0.5s ease",
-
-                    "&:hover": {
-                      transform: "scale(1.04)",
-                    },
-                  }}
-                />
-              </Box>
-
-              {/* Product Name */}
-              <Typography
-                component="h2"
-                sx={{
-                  margin: 0,
-                  mt: "17px",
-                  color: "#806c5d",
-                  fontFamily: "Arial, sans-serif",
-                  fontSize: {
-                    xs: "14px",
-                    sm: "15px",
-                    md: "16px",
-                  },
-                  fontWeight: 400,
-                  letterSpacing: {
-                    xs: "1px",
-                    md: "1.5px",
-                  },
-                  textTransform: "uppercase",
-                }}
-              >
-                {product.name}
-              </Typography>
-
-              {/* Optional description */}
-              {product.description && (
-                <Typography
-                  sx={{
-                    mt: "10px",
-                    color: "#777",
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: {
-                      xs: "13px",
-                      md: "14px",
-                    },
-                    lineHeight: 1.7,
-                    fontWeight: 300,
-
-                    display: "-webkit-box",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
-                >
-                  {product.description}
-                </Typography>
-              )}
-            </Box>
+            <ProductCard key={product.id} product={product} hasDescription={true} />
           ))}
         </Box>
 

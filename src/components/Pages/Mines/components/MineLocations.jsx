@@ -1,75 +1,144 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import minesData from "../../../Data/MinesData";
 
-const MinesHero = () => {
+const MineLocations = () => {
   return (
     <Box
       sx={{
-        position: "relative",
         width: "100%",
-        height: {
-          xs: "280px",
-          sm: "360px",
-          md: "450px",
-          lg: "520px",
+        backgroundColor: "#fff",
+        py: {
+          xs: "60px",
+          sm: "80px",
+          md: "110px",
         },
-        overflow: "hidden",
       }}
     >
-      <Box
-        component="img"
-        src="/images/about/story1.png"
-        alt="Mines"
-        sx={{
-          width: "100%",
-          height: "100%",
-          display: "block",
-          objectFit: "cover",
-          objectPosition: "center",
-        }}
-      />
+      <Container maxWidth={false} sx={{maxWidth: "1400px"}}>
+        {minesData.mines.map((mine, index) => {
+          const isReverse = index % 2 !== 0;
 
-      {/* Overlay */}
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.15) 65%, rgba(0,0,0,0.55))",
-        }}
-      />
+          return (
+            <Grid
+              container
+              key={mine.id}
+              sx={{
+                mb:
+                  index === minesData.mines.length - 1
+                    ? 0
+                    : {
+                        xs: "70px",
+                        md: "120px",
+                      },
+              }}
+            >
+              {/* IMAGE */}
 
-      <Typography
-        component="h1"
-        sx={{
-          position: "absolute",
-          left: {
-            xs: "24px",
-            sm: "8%",
-            md: "9%",
-          },
-          top: "50%",
-          transform: "translateY(-50%)",
-          margin: 0,
+              <Grid
+                size={{ xs: 12, md: 6 }}
+                sx={{
+                  order: {
+                    xs: 1,
+                    md: isReverse ? 2 : 1,
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: {
+                      xs: "280px",
+                      sm: "380px",
+                      md: "480px",
+                    },
+                    overflow: "hidden",
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={mine.image}
+                    alt={mine.name}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      display: "block",
+                      objectFit: "cover",
 
-          color: "#fff",
-          fontFamily: "Arial, sans-serif",
+                      transition: "transform 600ms ease",
 
-          fontSize: {
-            xs: "34px",
-            sm: "44px",
-            md: "56px",
-            lg: "64px",
-          },
+                      "&:hover": {
+                        transform: "scale(1.03)",
+                      },
+                    }}
+                  />
+                </Box>
+              </Grid>
 
-          fontWeight: 400,
-          lineHeight: 1.1,
-          letterSpacing: "1px",
-        }}
-      >
-        Mines
-      </Typography>
+              {/* CONTENT */}
+
+              <Grid
+                size={{ xs: 12, md: 6 }}
+                sx={{
+                  order: {
+                    xs: 2,
+                    md: isReverse ? 1 : 2,
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    px: {
+                      xs: 0,
+                      sm: "30px",
+                      md: isReverse ? "80px" : "70px",
+                      lg: isReverse ? "120px" : "100px",
+                    },
+
+                    py: {
+                      xs: "30px",
+                      md: 0,
+                    },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: {
+                        xs: "28px",
+                        md: "38px",
+                        lg: "44px",
+                      },
+                      fontWeight: 400,
+                      color: "#181818",
+                      lineHeight: 1.2,
+                      mb: "28px",
+                    }}
+                  >
+                    {mine.name}
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: {
+                        xs: "15px",
+                        md: "17px",
+                      },
+                      lineHeight: 1.7,
+                      color: "#5c6f82",
+                      maxWidth: "520px",
+                    }}
+                  >
+                    {mine.description}
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          );
+        })}
+      </Container>
     </Box>
   );
 };
 
-export default MinesHero;
+export default MineLocations;
