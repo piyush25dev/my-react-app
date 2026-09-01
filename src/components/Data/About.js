@@ -1,4 +1,3 @@
-// About.js
 const timelineData = [
   {
     id: 1,
@@ -85,5 +84,4 @@ const discoverData = [
   },
 ];
 
-// Named exports (no 'default' keyword)
 export  { timelineData, teamSliderData, discoverData };
