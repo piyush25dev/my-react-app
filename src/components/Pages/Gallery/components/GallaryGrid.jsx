@@ -6,21 +6,18 @@ import {
   MenuItem,
   Select,
   Typography,
+  IconButton,
 } from "@mui/material";
+import { Icon } from "@iconify/react";
 
 import { catalogueData } from "../../../Data/Gallery";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../../Custom/ProductCard";
 
 const GalleryGrid = () => {
   const [category, setCategory] = useState("");
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedType, setSelectedType] = useState("FULL");
 
-  /*
-   * =====================================================
-   * FILTER PRODUCTS
-   * =====================================================
-   */
 
   const filteredProducts = useMemo(() => {
     return catalogueData.filter((product) => {
@@ -35,11 +32,6 @@ const GalleryGrid = () => {
     });
   }, [category, selectedColor, selectedType]);
 
-  /*
-   * =====================================================
-   * COLORS
-   * =====================================================
-   */
 
   const colors = [
     {
@@ -88,13 +80,12 @@ const GalleryGrid = () => {
     },
   ];
 
-  /*
-   * =====================================================
-   * CATEGORIES
-   * =====================================================
-   */
-
   const categories = [...new Set(catalogueData.map((item) => item.category))];
+
+  // Clear color filter
+  const clearColorFilter = () => {
+    setSelectedColor(null);
+  };
 
   return (
     <Box
@@ -126,9 +117,6 @@ const GalleryGrid = () => {
           },
         }}
       >
-        {/* =================================================
-            HEADER
-        ================================================= */}
         <Typography
           sx={{
             fontFamily: "Arial, sans-serif",
@@ -149,9 +137,6 @@ const GalleryGrid = () => {
           Catalogue Exclusive Collection
         </Typography>
 
-        {/* =============================================
-            FILTERS
-        ============================================= */}
         <Box
           sx={{
             display: "flex",
@@ -225,9 +210,6 @@ const GalleryGrid = () => {
             </FormControl>
           </Box>
 
-          {/* =========================================
-              SEPARATOR
-          ========================================= */}
           <Box
             sx={{
               width: "1px",
@@ -240,9 +222,6 @@ const GalleryGrid = () => {
             }}
           />
 
-          {/* =========================================
-              COLOR
-          ========================================= */}
           <Box
             sx={{
               display: "flex",
@@ -267,7 +246,7 @@ const GalleryGrid = () => {
                   xs: 1,
                   sm: 1.4,
                 },
-                flexWrap: "wrap"
+                flexWrap: "wrap",
               }}
             >
               {colors.map((color) => (
@@ -304,12 +283,44 @@ const GalleryGrid = () => {
                   }}
                 />
               ))}
+
+              {/* Reset/Clear Color Button */}
+              {selectedColor && (
+                <IconButton
+                  onClick={clearColorFilter}
+                  size="small"
+                  sx={{
+                    ml: 0.5,
+                    width: {
+                      xs: "20px",
+                      sm: "22px",
+                    },
+                    height: {
+                      xs: "20px",
+                      sm: "22px",
+                    },
+                    backgroundColor: "#f5f5f5",
+                    border: "1px solid #ddd",
+                    "&:hover": {
+                      backgroundColor: "#e8e8e8",
+                      transform: "rotate(90deg)",
+                    },
+                    transition: "all 200ms ease",
+                    padding: 0,
+                  }}
+                  aria-label="Clear color filter"
+                >
+                  <Icon
+                    icon="material-symbols:close"
+                    width="14"
+                    height="14"
+                    style={{ color: "#666" }}
+                  />
+                </IconButton>
+              )}
             </Box>
           </Box>
 
-          {/* =========================================
-              SEPARATOR
-          ========================================= */}
           <Box
             sx={{
               width: "1px",
@@ -322,9 +333,6 @@ const GalleryGrid = () => {
             }}
           />
 
-          {/* =========================================
-              MATERIAL / LIFESTYLE
-          ========================================= */}
 
           <Box
             sx={{
@@ -362,9 +370,6 @@ const GalleryGrid = () => {
             ))}
           </Box>
 
-          {/* =========================================
-              SEPARATOR
-          ========================================= */}
           <Box
             sx={{
               width: "1px",
@@ -377,9 +382,6 @@ const GalleryGrid = () => {
             }}
           />
 
-          {/* =========================================
-              FULL BUTTON
-          ========================================= */}
 
           <Box
             onClick={() => setSelectedType("FULL")}

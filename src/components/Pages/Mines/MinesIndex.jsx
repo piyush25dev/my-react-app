@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import minesData from "../../Data/MinesData";
 import MinesHero from "./components/MinesHero";
-import MineLocations from "./components/MineLocations";
+// import MineLocations from "./components/MineLocations";
 import ProcessFlow from "./components/ProcessFlow";
 import MinesSection from "./components/MinesSection";
 
@@ -184,7 +184,7 @@ const MinesIndex = () => {
 
       {/* ================= MINES ================= */}
 
-      <MineLocations />
+      {/* <MineLocations /> */}
 
       {/* ================= CONCLUSION ================= */}
 

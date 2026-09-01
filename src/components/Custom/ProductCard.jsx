@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Typography, Dialog, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, hasDescription }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -15,10 +15,6 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
-      {/* =================================================
-          PRODUCT CARD
-      ================================================= */}
-
       <Box
         onClick={handleOpen}
         sx={{
@@ -34,9 +30,6 @@ const ProductCard = ({ product }) => {
           },
         }}
       >
-        {/* ================================================
-            IMAGE CONTAINER
-        ================================================= */}
 
         <Box
           sx={{
@@ -65,11 +58,6 @@ const ProductCard = ({ product }) => {
             }}
           />
         </Box>
-
-        {/* ================================================
-            PRODUCT NAME
-        ================================================= */}
-
         <Box
           sx={{
             px: {
@@ -86,31 +74,53 @@ const ProductCard = ({ product }) => {
           }}
         >
           <Typography
+            component="h2"
             sx={{
+              margin: 0,
+              mt: "17px",
+              color: "#806c5d",
               fontFamily: "Arial, sans-serif",
-
               fontSize: {
-                xs: "13px",
-                md: "14px",
+                xs: "14px",
+                sm: "15px",
+                md: "16px",
               },
-
-              letterSpacing: "1.5px",
-
-              color: "#ad9078",
-
-              textTransform: "uppercase",
-
               fontWeight: 400,
+              letterSpacing: {
+                xs: "1px",
+                md: "1.5px",
+              },
+              textTransform: "uppercase",
             }}
           >
             {product.name}
           </Typography>
+
+          {/* Optional description */}
+          {hasDescription && product.description && (
+            <Typography
+              sx={{
+                mt: "10px",
+                color: "#777",
+                fontFamily: "Arial, sans-serif",
+                fontSize: {
+                  xs: "13px",
+                  md: "14px",
+                },
+                lineHeight: 1.7,
+                fontWeight: 300,
+
+                display: "-webkit-box",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+              }}
+            >
+              {product.description}
+            </Typography>
+          )}
         </Box>
       </Box>
-
-      {/* =================================================
-          IMAGE DIALOG
-      ================================================= */}
 
       <Dialog
         open={open}
@@ -132,9 +142,6 @@ const ProductCard = ({ product }) => {
           },
         }}
       >
-        {/* ================================================
-            CLOSE BUTTON
-        ================================================= */}
 
         <IconButton
           onClick={handleClose}
@@ -168,25 +175,15 @@ const ProductCard = ({ product }) => {
 
             color: "#fff",
 
-            backgroundColor:
-              "rgba(0, 0, 0, 0.65)",
+            backgroundColor: "rgba(0, 0, 0, 0.65)",
 
             "&:hover": {
-              backgroundColor:
-                "rgba(0, 0, 0, 0.85)",
+              backgroundColor: "rgba(0, 0, 0, 0.85)",
             },
           }}
         >
-          <Icon
-            icon="material-symbols:close"
-            width="22"
-            height="22"
-          />
+          <Icon icon="material-symbols:close" width="22" height="22" />
         </IconButton>
-
-        {/* ================================================
-            LARGE IMAGE
-        ================================================= */}
 
         <Box
           component="img"
