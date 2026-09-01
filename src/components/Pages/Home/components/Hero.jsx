@@ -120,7 +120,7 @@ function Hero() {
 
       <section
         id="section-1"
-        className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+        className="relative h-[60vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
@@ -156,7 +156,7 @@ function Hero() {
 
       <section
         id="section-2"
-        className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+        className="relative h-[60vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
@@ -175,7 +175,7 @@ function Hero() {
 
       <section
         id="section-3"
-        className="relative h-[40vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+        className="relative h-[60vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
@@ -194,7 +194,7 @@ function Hero() {
 
       <section
         id="section-4"
-        className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+        className="relative h-[65vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
@@ -229,7 +229,7 @@ function Hero() {
 
       <section
         id="section-5"
-        className="relative h-[35vh] w-full bg-black text-white md:h-[40vh]"
+        className="relative h-[45vh] w-full bg-black text-white md:h-[60vh]"
       >
         {/* Heading */}
         <div className="absolute left-0 top-[50px] w-full px-4 text-center md:top-[90px]">
@@ -258,7 +258,7 @@ function Hero() {
 
       <section
         id="section-6"
-        className="relative h-[45vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
+        className="relative h-[65vh] w-full overflow-hidden md:h-auto md:aspect-[1845/661] cursor-pointer"
       >
         <div className="kenburns-wrapper absolute inset-0 h-full w-full">
           <img
