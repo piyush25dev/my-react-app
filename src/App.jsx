@@ -18,14 +18,29 @@ import MinesIndex from "./components/Pages/Mines/MinesIndex";
 import ItalianMarbleApplications from "./components/Pages/Products/Applications/ItalianMarbleApplications";
 
 const pageTitles = {
+  // Home
   "/": "Home | VAASTU",
-  "/about": "About | VAASTU",
-  "/collection": "Collection | VAASTU",
-  "/collection/exclusive": "Exclusive Collection | VAASTU",
-  "/contact": "Contact | VAASTU",
+
+  // Main pages
+  "/about": "About Us | VAASTU",
+  "/contact": "Contact Us | VAASTU",
   "/gallery": "Gallery | VAASTU",
   "/testimonials": "Testimonials | VAASTU",
-  "/mines": "MINES | VAASTU",
+  "/mines": "Mines | VAASTU",
+
+  // Products
+  "/products/indian-marbles": "Indian Marbles | VAASTU",
+  "/products/italian-marbles": "Italian Marbles | VAASTU",
+  "/products/indian-granite": "Indian Granite | VAASTU",
+  "/products/italian-granite": "Italian Granite | VAASTU",
+
+  // Applications
+  "/application-of-italian-marble":
+    "Applications of Italian Marble | VAASTU",
+
+  // Exotic
+  "/exotic/antico-gold": "Antico Gold | VAASTU",
+  "/exotic/alaska-white": "Alaska White | VAASTU",
 };
 
 const PageTitle = () => {
