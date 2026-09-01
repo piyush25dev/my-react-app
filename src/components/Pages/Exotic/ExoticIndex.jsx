@@ -179,8 +179,7 @@ const ExoticIndex = () => {
             inset: 0,
 
             background:
-              "linear-gradient(90deg, rgba(0,0,0,0.48), rgba(0,0,0,0.12) 60%, rgba(0,0,0,1.08))",
-
+              "linear-gradient(90deg, rgba(0,0,0,0.48), rgba(0,0,0,0.02) 60%, rgba(0,0,0,0.08))",
             pointerEvents: "none",
           }}
         />
