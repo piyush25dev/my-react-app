@@ -9,10 +9,9 @@ const MinesSection = () => {
         width: "100%",
         backgroundColor: "#fff",
         py: {
-          xs: "50px",
-          sm: "70px",
-          md: "100px",
-          lg: "60px",
+          xs: "20px",
+          sm: "25px",
+          md: "30px",
         },
         overflow: "hidden",
       }}
@@ -23,13 +22,13 @@ const MinesSection = () => {
           width: "100%",
           maxWidth: "1400px",
           mx: "auto",
-          px: {
-            xs: "20px",
-            sm: "35px",
-            md: "50px",
-            lg: "70px",
-            xl: "80px",
-          },
+          // px: {
+          //   xs: "20px",
+          //   sm: "35px",
+          //   md: "50px",
+          //   lg: "70px",
+          //   xl: "80px",
+          // },
         }}
       >
         <Grid
@@ -55,7 +54,7 @@ const MinesSection = () => {
                   maxWidth: {
                     xs: "600px",
                     md: "580px",
-                    lg: "600px",
+                    lg: "700px",
                   },
                 }}
               >

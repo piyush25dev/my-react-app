@@ -11,19 +11,19 @@ const ProcessFlow = () => {
         width: "100%",
         backgroundColor: "#f8f7f5",
         py: {
-          xs: "70px",
-          sm: "90px",
-          md: "120px",
+          xs: "30px",
+          sm: "40px",
+          md: "50px",
         },
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{ maxWidth: "1400px" }}>
         {/* HEADING */}
         <Box
           sx={{
             mb: {
-              xs: "55px",
-              md: "80px",
+              xs: "25px",
+              md: "40px",
             },
           }}
         >

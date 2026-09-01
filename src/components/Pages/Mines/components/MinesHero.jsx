@@ -64,7 +64,7 @@ const MinesHero = () => {
           fontWeight: 400,
           lineHeight: 1.1,
           letterSpacing: "1px",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         Mines

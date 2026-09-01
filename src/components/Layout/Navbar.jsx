@@ -347,7 +347,7 @@ const Navbar = () => {
                         );
                       }
                     }}
-                    className="
+                    className={`
                       group
                       flex
                       w-full
@@ -364,7 +364,7 @@ const Navbar = () => {
                       text-neutral-900
 
                       transition-opacity
-                      hover:opacity-50
+                      hover:opacity-70
 
                       md:w-auto
                       md:justify-center
@@ -372,9 +372,21 @@ const Navbar = () => {
                       md:py-0
                       md:text-[14px]
                       md:text-neutral-800
+                      md:relative
+
+                      // Border bottom only on hover for submenu items
+                      md:after:absolute
+                      md:after:bottom-[-4px]
+                      md:after:left-0
+                      md:after:h-[2px]
+                      md:after:w-0
+                      md:after:bg-[#7D7D7D]
+                      md:after:transition-all
+                      md:after:duration-300
+                      hover:md:after:w-full
 
                       cursor-pointer
-                    "
+                    `}
                   >
                     <span>{label}</span>
                     <ChevronDown
@@ -394,7 +406,7 @@ const Navbar = () => {
                   <Link
                     to={to}
                     onClick={closeMenu}
-                    className="
+                    className={`
                       flex
                       w-full
                       items-center
@@ -408,7 +420,7 @@ const Navbar = () => {
                       text-neutral-900
 
                       transition-opacity
-                      hover:opacity-50
+                      hover:opacity-70
 
                       md:w-auto
                       md:justify-center
@@ -416,7 +428,9 @@ const Navbar = () => {
                       md:py-0
                       md:text-[14px]
                       md:text-neutral-800
-                    "
+
+                      // No border bottom for regular links
+                    `}
                   >
                     {label}
                   </Link>
@@ -459,7 +473,7 @@ const Navbar = () => {
                                 tracking-wide
                                 text-neutral-700
                                 transition-opacity
-                                hover:opacity-50
+                                hover:opacity-70
                               "
                             >
                               {item.label}

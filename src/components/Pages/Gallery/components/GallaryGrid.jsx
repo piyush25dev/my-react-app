@@ -7,6 +7,7 @@ import {
   Select,
   Typography,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 
@@ -169,10 +170,7 @@ const GalleryGrid = () => {
             <FormControl
               size="small"
               sx={{
-                minWidth: {
-                  xs: 140,
-                  sm: 180,
-                },
+                minWidth: {xs: 140, sm: 180},
               }}
             >
               <Select
@@ -248,45 +246,41 @@ const GalleryGrid = () => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: {
-                  xs: 1,
-                  sm: 1.4,
-                },
+                gap: {xs: 1, sm: 1.4},
                 flexWrap: "wrap",
               }}
             >
               {colors.map((color) => (
-                <Box
+                <Tooltip
                   key={color.name}
-                  onClick={() =>
-                    setSelectedColor(
-                      selectedColor === color.name ? null : color.name,
-                    )
-                  }
-                  sx={{
-                    width: {
-                      xs: "16px",
-                      sm: "18px",
-                    },
-
-                    height: {
-                      xs: "16px",
-                      sm: "18px",
-                    },
-                    borderRadius: "50%",
-                    backgroundColor: color.value,
-                    cursor: "pointer",
-                    border: color.name === "white" ? "1px solid #ccc" : "none",
-                    boxShadow:
-                      selectedColor === color.name
-                        ? "0 0 0 2px #fff, 0 0 0 3px #a7957f"
-                        : "0 1px 4px rgba(0,0,0,0.15)",
-                    transition: "all 180ms ease",
-                    "&:hover": {
-                      transform: "scale(1.15)",
-                    },
-                  }}
-                />
+                  title={color.name.toUpperCase()}
+                  arrow
+                  placement="top"
+                >
+                  <Box
+                    onClick={() =>
+                      setSelectedColor(
+                        selectedColor === color.name ? null : color.name,
+                      )
+                    }
+                    sx={{
+                      width: { xs: "16px", sm: "18px"},
+                      height: { xs: "16px", sm: "18px"},
+                      borderRadius: "50%",
+                      backgroundColor: color.value,
+                      cursor: "pointer",
+                      border: color.name === "white" ? "1px solid #ccc" : "none",
+                      boxShadow:
+                        selectedColor === color.name
+                          ? "0 0 0 2px #fff, 0 0 0 3px #a7957f"
+                          : "0 1px 4px rgba(0,0,0,0.15)",
+                      transition: "all 180ms ease",
+                      "&:hover": {
+                        transform: "scale(1.15)",
+                      },
+                    }}
+                  />
+                </Tooltip>
               ))}
 
               {/* Reset/Clear Color Button */}
@@ -428,10 +422,6 @@ const GalleryGrid = () => {
             </Typography>
           </Box>
         </Box>
-
-        {/* =================================================
-            PRODUCT GRID
-        ================================================= */}
 
         <Box
           sx={{
