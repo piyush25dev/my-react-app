@@ -18,7 +18,6 @@ const GalleryGrid = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedType, setSelectedType] = useState("FULL");
 
-
   const filteredProducts = useMemo(() => {
     return catalogueData.filter((product) => {
       const categoryMatch = !category || product.category === category;
@@ -31,7 +30,6 @@ const GalleryGrid = () => {
       return categoryMatch && colorMatch && typeMatch;
     });
   }, [category, selectedColor, selectedType]);
-
 
   const colors = [
     {
@@ -186,17 +184,25 @@ const GalleryGrid = () => {
                   backgroundColor: "#fff",
                   borderRadius: "3px",
                   fontSize: "13px",
+                  color: "#5c5047",
                   "& .MuiSelect-select": {
                     py: 0.5,
+                    color: "#5c5047",
                   },
-                  "& fieldset": {
-                    border: "2px solid #1d1d1d",
+                  "& .MuiSelect-icon": {
+                    color: "#806c5d",
                   },
-                  "&:hover fieldset": {
-                    border: "2px solid #1d1d1d",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #CFCAC3",
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid #1d1d1d",
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #CFCAC3",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #CFCAC3",
+                  },
+                  "&.Mui-focused": {
+                    color: "#5c5047",
                   },
                 }}
               >
@@ -254,7 +260,7 @@ const GalleryGrid = () => {
                   key={color.name}
                   onClick={() =>
                     setSelectedColor(
-                      selectedColor === color.name ? null : color.name
+                      selectedColor === color.name ? null : color.name,
                     )
                   }
                   sx={{
@@ -270,8 +276,7 @@ const GalleryGrid = () => {
                     borderRadius: "50%",
                     backgroundColor: color.value,
                     cursor: "pointer",
-                    border:
-                      color.name === "white" ? "1px solid #ccc" : "none",
+                    border: color.name === "white" ? "1px solid #ccc" : "none",
                     boxShadow:
                       selectedColor === color.name
                         ? "0 0 0 2px #fff, 0 0 0 3px #a7957f"
@@ -333,7 +338,6 @@ const GalleryGrid = () => {
             }}
           />
 
-
           <Box
             sx={{
               display: "flex",
@@ -381,7 +385,6 @@ const GalleryGrid = () => {
               },
             }}
           />
-
 
           <Box
             onClick={() => setSelectedType("FULL")}
@@ -449,10 +452,6 @@ const GalleryGrid = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </Box>
-
-        {/* =================================================
-            EMPTY STATE
-        ================================================= */}
 
         {filteredProducts.length === 0 && (
           <Box
