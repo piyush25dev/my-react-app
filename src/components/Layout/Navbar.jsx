@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
 import { navLinks, submenuData } from "../Data/NavData";
 
-const TRANSITION = "duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]";
+const TRANSITION = "duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

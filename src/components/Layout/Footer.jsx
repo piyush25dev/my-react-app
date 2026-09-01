@@ -49,8 +49,12 @@ const Footer = () => {
         <div>
           <p className="text-[14px] tracking-[0.18em]">FOLLOW US</p>
           <div className="mt-5 flex flex-col text-[16px] leading-[1.35]">
-            <p>+91 9391930777</p>
-            <p>girishpunglia@gmail.com</p>
+            <a href="tel:+919391930777" >
+              +91 9391930777
+            </a>
+            <a href="mailto:girishpunglia@gmail.com">
+              girishpunglia@gmail.com
+            </a>
           </div>
         </div>
       </div>

@@ -37,30 +37,19 @@ const CompanyTimeline = () => {
 
       if (!timelineData.length) return;
 
-      /*
-       * =====================================================
-       * FIRST EVENT
-       * =====================================================
-       */
-
+      // First Event
       const firstElement = itemRefs.current[0];
 
       if (!firstElement) return;
 
-      /*
-       * First event always starts here.
-       */
+      //First event always starts here.
       newPositions[0] = INITIAL_TOP;
 
       /*
-       * =====================================================
        * FIRST TRANSITION
-       *
        * Special rule:
-       *
        * 2008 text       -> pushes 2009
        * 2008 image      -> does NOT push 2009
-       * =====================================================
        */
 
       const firstFlow = firstElement.querySelector("[data-timeline-flow]");
@@ -72,15 +61,11 @@ const CompanyTimeline = () => {
       }
 
       /*
-       * =====================================================
        * INDEPENDENT LEFT / RIGHT FLOWS
-       *
        * LEFT:
        * 2009 -> 2011 -> 2013
-       *
        * RIGHT:
        * 2008 -> 2010 -> 2012
-       * =====================================================
        */
 
       let lastLeftPosition = null;
@@ -88,13 +73,7 @@ const CompanyTimeline = () => {
 
       let lastLeftElement = null;
       let lastRightElement = null;
-
-      /*
-       * =====================================================
-       * FIRST ITEM
-       * =====================================================
-       */
-
+      // First Item
       if (timelineData[0]?.side === "left") {
         lastLeftPosition = INITIAL_TOP;
         lastLeftElement = firstElement;
@@ -102,35 +81,23 @@ const CompanyTimeline = () => {
         lastRightPosition = INITIAL_TOP;
         lastRightElement = firstElement;
       }
-
-      /*
-       * =====================================================
-       * SECOND ITEM
-       * =====================================================
-       */
-
+      // Second Item
       if (timelineData.length > 1) {
         const secondElement = itemRefs.current[1];
-
         if (timelineData[1]?.side === "left") {
           lastLeftPosition = newPositions[1];
-
           lastLeftElement = secondElement;
         } else {
           lastRightPosition = newPositions[1];
-
           lastRightElement = secondElement;
         }
       }
 
       /*
-       * =====================================================
        * REMAINING ITEMS
-       *
        * From here onward, the COMPLETE item height
        * (including image) determines the next item
        * on the SAME side.
-       * =====================================================
        */
 
       for (let i = 2; i < timelineData.length; i++) {
@@ -139,13 +106,7 @@ const CompanyTimeline = () => {
         if (!element) continue;
 
         const item = timelineData[i];
-
-        /*
-         * -----------------------------------------------
-         * LEFT SIDE
-         * -----------------------------------------------
-         */
-
+        // Left Side
         if (item.side === "left") {
           if (lastLeftElement && lastLeftPosition !== null) {
             newPositions[i] =
@@ -158,72 +119,42 @@ const CompanyTimeline = () => {
 
           lastLeftElement = element;
         } else {
-
-        /*
-         * -----------------------------------------------
-         * RIGHT SIDE
-         * -----------------------------------------------
-         */
+          // Right side
           if (lastRightElement && lastRightPosition !== null) {
             newPositions[i] =
               lastRightPosition + lastRightElement.offsetHeight + EVENT_GAP;
           } else {
             newPositions[i] = INITIAL_TOP;
           }
-
           lastRightPosition = newPositions[i];
-
           lastRightElement = element;
         }
       }
 
-      /*
-       * =====================================================
-       * UPDATE EVENT POSITIONS
-       * =====================================================
-       */
-
+      // UPDATE EVENT POSITIONS
       setPositions(newPositions);
 
       /*
-       * =====================================================
        * CENTER LINE HEIGHT
-       *
        * The line:
-       *
        * - starts at the first dot
        * - ends at the bottom of the LAST event
-       *
        * This includes the last image.
-       * =====================================================
        */
-
       const lastIndex = timelineData.length - 1;
-
       const lastElement = itemRefs.current[lastIndex];
 
       if (lastElement) {
         const lastBottom = newPositions[lastIndex] + lastElement.offsetHeight;
-
         const calculatedLineHeight = lastBottom - INITIAL_TOP;
-
         setLineHeight(Math.max(calculatedLineHeight, 0));
       }
     };
-
-    /*
-     * Initial calculation
-     */
+    // Initial calculation
     calculatePositions();
-
-    /*
-     * Recalculate on resize AND zoom
-     */
+    // Recalculate on resize AND zoom
     window.addEventListener("resize", calculatePositions);
-
-    /*
-     * Recalculate after images load
-     */
+    //Recalculate after images load
     const images = document.querySelectorAll("[data-company-timeline] img");
 
     images.forEach((image) => {
@@ -240,17 +171,13 @@ const CompanyTimeline = () => {
   }, []);
 
   /*
-   * =====================================================
    * TIMELINE CONTAINER HEIGHT
-   *
    * Need enough space for the final image.
-   * =====================================================
    */
-
   const timelineHeight = Math.max(lineHeight + spacing.INITIAL_TOP + 100, 500);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth={false} sx={{ maxWidth: "1400px" }}>
       <Box
         data-company-timeline
         sx={{
@@ -273,11 +200,9 @@ const CompanyTimeline = () => {
 
               minHeight: `${timelineHeight}px`,
               /*
-               * =================================================
                * CENTER VERTICAL LINE
                * Starts at the first dot.
                * Ends at the bottom of the last content.
-               * =================================================
                */
               "&::before": {
                 content: '""',
@@ -312,9 +237,7 @@ const CompanyTimeline = () => {
   );
 };
 
-/* =========================================================
-   TIMELINE ITEM
-========================================================= */
+//  TIMELINE ITEM
 
 const TimelineItem = ({ item, top, itemRef }) => {
   const isLeft = item.side === "left";
@@ -324,14 +247,10 @@ const TimelineItem = ({ item, top, itemRef }) => {
       ref={itemRef}
       sx={{
         position: "absolute",
-
         top: `${top}px`,
-
         left: 0,
         right: 0,
-
         width: "100%",
-
         "@media (max-width: 768px)": {
           position: "static",
           top: "auto",
@@ -339,10 +258,7 @@ const TimelineItem = ({ item, top, itemRef }) => {
         },
       }}
     >
-      {/* =================================================
-          HORIZONTAL LINE
-      ================================================= */}
-
+      {/* HORIZONTAL LINE */}
       <Box
         sx={{
           position: "absolute",
@@ -364,11 +280,7 @@ const TimelineItem = ({ item, top, itemRef }) => {
           },
         }}
       />
-
-      {/* =================================================
-          CENTER DOT
-      ================================================= */}
-
+      {/* CENTER DOT */}
       <Box
         sx={{
           position: "absolute",
@@ -385,11 +297,7 @@ const TimelineItem = ({ item, top, itemRef }) => {
           },
         }}
       />
-
-      {/* =================================================
-          CONTENT
-      ================================================= */}
-
+      {/* CONTENT */}
       <Box
         sx={{
           position: "relative",
@@ -413,14 +321,10 @@ const TimelineItem = ({ item, top, itemRef }) => {
           },
         }}
       >
-        {/* =================================================
-            FLOW CONTENT
-
+        {/*FLOW CONTENT
             Year + description.
-
             For the FIRST event this is the ONLY
-            content used to position the next event.
-        ================================================= */}
+            content used to position the next event. */}
         <Box data-timeline-flow>
           {/* YEAR */}
           <Typography
@@ -438,14 +342,12 @@ const TimelineItem = ({ item, top, itemRef }) => {
               color: "#151515",
               whiteSpace: "nowrap",
               fontFamily: "Arial, sans-serif",
-              borderBottom: {xs: "1px solid #d1cdc8", md: "none"},
+              borderBottom: { xs: "1px solid #d1cdc8", md: "none" },
             }}
           >
             {item.year}
           </Typography>
-
           {/* DESCRIPTION */}
-
           <Typography
             sx={{
               margin: 0,
