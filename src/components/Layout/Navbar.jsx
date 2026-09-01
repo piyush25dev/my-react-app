@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, ChevronDown, Menu } from "lucide-react";
-import { navLinks, submenuData } from "../Data/NavData"
+import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { navLinks, submenuData } from "../Data/NavData";
 
 const TRANSITION = "duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]";
 
@@ -10,6 +10,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -42,7 +44,30 @@ const Navbar = () => {
     setActiveSubmenu(null);
   };
 
-  const shouldHaveWhiteBackground = !isHomePage || isScrolled || menuOpen;
+  const toggleSearch = () => {
+    setSearchOpen(!searchOpen);
+    if (!searchOpen) {
+      // Focus the input when opening
+      setTimeout(() => {
+        const searchInput = document.getElementById("search-input");
+        if (searchInput) searchInput.focus();
+      }, 100);
+    } else {
+      setSearchQuery("");
+    }
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      console.log("Searching for:", searchQuery);
+      // Navigate to search results or handle search
+      // navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+  const shouldHaveWhiteBackground =
+    !isHomePage || isScrolled || menuOpen || searchOpen;
 
   return (
     <header
@@ -57,7 +82,7 @@ const Navbar = () => {
       `}
       onMouseLeave={() => {
         // Close everything when mouse leaves the header (desktop only)
-        if (!isMobile) {
+        if (!isMobile && !searchOpen) {
           closeMenu();
         }
       }}
@@ -77,7 +102,10 @@ const Navbar = () => {
         {/* LOGO */}
         <Link
           to="/"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+            setSearchOpen(false);
+          }}
           className="flex items-center leading-none"
         >
           <img
@@ -92,31 +120,37 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Menu Button */}
-        <button
-          type="button"
-          onClick={() => {
-            setMenuOpen((prev) => !prev);
-            setActiveSubmenu(null);
-          }}
-          className={`
-            flex cursor-pointer
-            items-center gap-2
-            transition-colors ${TRANSITION}
-            ${shouldHaveWhiteBackground ? "text-black" : "text-white"}
-          `}
-          aria-label="Toggle navigation"
-          aria-expanded={menuOpen}
-        >
-          <Menu
-            size={20}
+        {/* Right side - Search Icon and Menu Button */}
+        <div className="flex items-center gap-4">
+          {/* Search Icon - Expands on click */}
+
+          {/* Menu Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen((prev) => !prev);
+              setActiveSubmenu(null);
+              setSearchOpen(false);
+            }}
             className={`
-              transition-transform ${TRANSITION}
-              ${menuOpen ? "rotate-90" : "rotate-0"}
+              flex cursor-pointer
+              items-center gap-2
+              transition-colors ${TRANSITION}
+              ${shouldHaveWhiteBackground ? "text-black" : "text-white"}
             `}
-          />
-          <span className="text-xs tracking-widest">MENU</span>
-        </button>
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+          >
+            <Menu
+              size={20}
+              className={`
+                transition-transform ${TRANSITION}
+                ${menuOpen ? "rotate-90" : "rotate-0"}
+              `}
+            />
+            <span className="text-xs tracking-widest">MENU</span>
+          </button>
+        </div>
       </div>
 
       {/* Dropdown panel */}
@@ -179,12 +213,83 @@ const Navbar = () => {
               text-neutral-700
             "
           >
-            {/* SEARCH */}
-            <div className="flex items-center gap-2 text-neutral-600">
-              <Search size={18} className="cursor-pointer" />
-              <span className="md:hidden">SEARCH</span>
-            </div>
-
+            {!searchOpen ? (
+              <button
+                onClick={toggleSearch}
+                className={`
+                p-1
+                transition-opacity
+                hover:opacity-60
+                ${shouldHaveWhiteBackground ? "text-black" : "text-white"}
+              `}
+                aria-label="Search"
+              >
+                <Search size={20} />
+              </button>
+            ) : (
+              <form
+                onSubmit={handleSearchSubmit}
+                className="flex items-center gap-2"
+              >
+                <div className="relative flex items-center">
+                  <Search
+                    size={18}
+                    className="absolute left-2 text-neutral-400"
+                  />
+                  <input
+                    id="search-input"
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search products..."
+                    className="
+                    w-40 sm:w-56 md:w-64
+                    border border-neutral-300
+                    rounded-full
+                    bg-white
+                    pl-8 pr-4 py-1.5
+                    text-sm
+                    text-neutral-800
+                    outline-none
+                    transition-all ${TRANSITION}
+                    focus:border-[#806c5d]
+                    focus:shadow-md
+                  "
+                    autoFocus
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="
+                  px-3 py-1.5
+                  text-xs
+                  font-medium
+                  tracking-wider
+                  text-white
+                  bg-[#806c5d]
+                  rounded-full
+                  transition-all
+                  hover:bg-[#6b5a4d]
+                  hover:scale-105
+                "
+                >
+                  Search
+                </button>
+                <button
+                  type="button"
+                  onClick={toggleSearch}
+                  className="
+                  p-1
+                  transition-opacity
+                  hover:opacity-60
+                  text-neutral-600
+                "
+                  aria-label="Close search"
+                >
+                  <X size={18} />
+                </button>
+              </form>
+            )}
             {/* CONTACT */}
             <Link
               to="/contact"
@@ -238,7 +343,7 @@ const Navbar = () => {
                     onClick={() => {
                       if (isMobile) {
                         setActiveSubmenu(
-                          activeSubmenu === label ? null : label
+                          activeSubmenu === label ? null : label,
                         );
                       }
                     }}
