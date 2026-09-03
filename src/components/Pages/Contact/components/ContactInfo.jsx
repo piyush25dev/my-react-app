@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Link, Typography } from "@mui/material";
 import { contactData } from "../../../Data/contactData";
+import { Icon } from "@iconify/react";
 
 const ContactInfo = () => {
   return (
@@ -49,7 +50,15 @@ const ContactInfo = () => {
               fontWeight: 300,
             }}
           >
-            <span style={{fontSize: "18px", color: "#777373", fontFamily: "nimbus-sans, sans-serif"}}>{office.company}</span>
+            <span
+              style={{
+                fontSize: "18px",
+                color: "#777373",
+                fontFamily: "nimbus-sans, sans-serif",
+              }}
+            >
+              {office.company}
+            </span>
             <br />
 
             {office.address.map((line, lineIndex) => (
@@ -111,21 +120,63 @@ const ContactInfo = () => {
           PHONE NO
         </Typography>
 
-        {contactData.phones.map((phone) => (
-          <Link
-            key={phone}
-            href={`tel:${phone.replace(/\s/g, "")}`}
-            underline="none"
-            sx={{
-              display: "block",
-              color: "#315b82",
-              fontSize: "16px",
-              lineHeight: 1.7,
-            }}
-          >
-            Tel: {phone}
-          </Link>
-        ))}
+        {contactData.phones.map((phone) => {
+          const cleanPhone = phone.number.replace(/\D/g, "");
+
+          return (
+            <Box
+              key={phone.number}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1.5,
+                mb: 0.5,
+              }}
+            >
+              {/* Phone */}
+              <Link
+                href={`tel:${cleanPhone}`}
+                underline="none"
+                sx={{
+                  color: "#315b82",
+                  fontSize: "16px",
+                  lineHeight: 1.7,
+
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                Tel: {phone.number}
+              </Link>
+
+              {/* WhatsApp */}
+              {phone.whatsapp && (
+                <Link
+                  href={`https://wa.me/${cleanPhone}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Chat on WhatsApp ${phone.number}`}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "24px",
+                    height: "24px",
+                    flexShrink: 0,
+                    transition: "transform 200ms ease",
+
+                    "&:hover": {
+                      transform: "scale(1.1)",
+                    },
+                  }}
+                >
+                  <Icon icon="logos:whatsapp-icon" width="20" height="20" />
+                </Link>
+              )}
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

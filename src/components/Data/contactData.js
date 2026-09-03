@@ -23,21 +23,21 @@ export const contactData = {
     {
       title: "Factory Location-2",
       company: "Himalayan Onyx Pvt.Ltd",
-      address: [
-        "Near Mandalda Village",
-        "Chittorgarh, Rajasthan-312001.",
-      ],
+      address: ["Near Mandalda Village", "Chittorgarh, Rajasthan-312001."],
     },
   ],
 
-  emails: [
-    "girishpunglia@gmail.com",
-    "sales@vaastumarble.com",
-  ],
+  emails: ["girishpunglia@gmail.com", "sales@vaastumarble.com"],
 
   phones: [
-    "+91 9391930777",
-    "+91 9414109808",
+    {
+      number: "+91 9414109808",
+      whatsapp: true,
+    },
+    {
+      number: "+91 9391930777",
+      whatsapp: false,
+    },
   ],
 
   privacyPolicy: "https://vaastumarble.com/privacy_policy.html",

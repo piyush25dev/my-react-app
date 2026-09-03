@@ -292,6 +292,14 @@ const Navbar = () => {
             )}
             {/* CONTACT */}
             <Link
+              to="/store-locator"
+              onClick={closeMenu}
+              className="hover:opacity-60"
+            >
+              STORE LOCATOR
+            </Link>
+            <span className="hidden text-neutral-300 md:inline">|</span>
+            <Link
               to="/contact"
               onClick={closeMenu}
               className="hover:opacity-60"
@@ -299,13 +307,13 @@ const Navbar = () => {
               CONTACT US
             </Link>
 
-            <span className="hidden text-neutral-300 md:inline">|</span>
+            {/* <span className="hidden text-neutral-300 md:inline">|</span> */}
 
             {/* LANGUAGE */}
-            <span className="flex items-center gap-1">
+            {/* <span className="flex items-center gap-1">
               ENG
               <ChevronDown size={14} />
-            </span>
+            </span> */}
           </div>
 
           {/* Main Navigation */}

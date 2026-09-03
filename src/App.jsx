@@ -16,6 +16,8 @@ import ProductIndex from "./components/Pages/Products/ProductIndex";
 import ExoticIndex from "./components/Pages/Exotic/ExoticIndex";
 import MinesIndex from "./components/Pages/Mines/MinesIndex";
 import ItalianMarbleApplications from "./components/Pages/Products/Applications/ItalianMarbleApplications";
+import StoreIndex from "./components/Pages/StoreLocator/StoreIndex";
+import ScrollToTop from "./components/Custom/ScrollToTop";
 
 const pageTitles = {
   // Home
@@ -27,6 +29,7 @@ const pageTitles = {
   "/gallery": "Gallery | VAASTU",
   "/testimonials": "Testimonials | VAASTU",
   "/mines": "Mines | VAASTU",
+  "/store-locator": "Store Locator | VAASTU",
 
   // Products
   "/products/indian-marbles": "Indian Marbles | VAASTU",
@@ -65,6 +68,7 @@ function App() {
           <Route path="/" element={<HomeIndex />} />
 
           <Route path="/contact" element={<ContactIndex />} />
+          <Route path="/store-locator" element={<StoreIndex />} />
           {/* Products */}
           <Route path="/products/indian-marbles" element={<ProductIndex />} />
           <Route path="/products/italian-marbles" element={<ProductIndex />} />
@@ -89,6 +93,7 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <ScrollToTop />
     </BrowserRouter>
   );
 }
