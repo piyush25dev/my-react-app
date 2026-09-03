@@ -6,6 +6,7 @@ const SLIDE_DURATION = 5000; // ms — keep in sync with the interval below
 // one entry per section on the page, in order — used to drive the side dots
 const SECTION_IDS = [
   "hero",
+  "product-video",
   "section-1",
   "section-2",
   "section-3",
@@ -32,13 +33,13 @@ function Hero() {
     }, SLIDE_DURATION);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   // track which section is on screen, to drive the side dots
   useEffect(() => {
-    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
-      Boolean
-    );
+    const sections = SECTION_IDS.map((id) =>
+      document.getElementById(id),
+    ).filter(Boolean);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -53,7 +54,7 @@ function Hero() {
         // a section counts as "current" once it crosses the middle of the viewport
         rootMargin: "-45% 0px -45% 0px",
         threshold: 0,
-      }
+      },
     );
 
     sections.forEach((el) => observer.observe(el));
@@ -61,7 +62,9 @@ function Hero() {
   }, []);
 
   const scrollToSection = (idx) => {
-    document.getElementById(SECTION_IDS[idx])?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById(SECTION_IDS[idx])
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -116,6 +119,41 @@ function Hero() {
         </div>
       </main>
 
+      {/* Product Video Section */}
+      <section
+        id="product-video"
+        className="relative flex h-[75vh] w-full items-center justify-center overflow-hidden bg-black md:h-[85vh]"
+      >
+        {/* Video */}
+        <video
+          src="/videos/intro.mov"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="h-full w-full object-cover"
+        />
+
+        {/* Optional dark overlay */}
+        <div className="absolute inset-0 bg-black/20" />
+
+        {/* Content */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center px-4 text-center text-white">
+          <div>
+            <p className="text-[10px] tracking-[0.3em] md:text-[13px]">
+              DISCOVER OUR COLLECTION
+            </p>
+
+            <h2 className="mt-3 text-3xl font-light md:text-6xl">
+              Crafted by Nature
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-[600px] text-sm md:text-xl">
+              Explore the beauty, texture and character of our natural stone.
+            </p>
+          </div>
+        </div>
+      </section>
       {/* Section - 1 */}
 
       <section
@@ -189,6 +227,7 @@ function Hero() {
           <h2 className="text-xl md:-mt-4 md:text-4xl">Example Container</h2>
         </div>
       </section>
+
 
       {/* Section - 4 */}
 
