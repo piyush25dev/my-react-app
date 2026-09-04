@@ -113,7 +113,7 @@ const ProductIndex = () => {
             letterSpacing: { xs: "1px", md: "1.8px" },
             color: "#806c5d",
             fontWeight: 400,
-            textTransform: "uppercase"
+            textTransform: "uppercase",
           }}
         >
           {" "}
