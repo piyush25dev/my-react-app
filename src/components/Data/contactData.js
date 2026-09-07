@@ -4,6 +4,7 @@ export const contactData = {
   offices: [
     {
       title: "Showroom - Karmanghat",
+      image: "/images/contact/karmanghat.png",
       company: "Vaastu Marble & Granites Pvt.Ltd",
       address: [
         "Opposite to Ayyappa Temple,",
@@ -12,8 +13,10 @@ export const contactData = {
         "Telangana, India",
       ],
     },
+
     {
       title: "Showroom - Shamshabad",
+      image: "/images/contact/shamshabad.png",
       company: "Vaastu Marble & Granites Pvt.Ltd",
       address: [
         "National Highway 44,",
@@ -24,7 +27,10 @@ export const contactData = {
     },
   ],
 
-  emails: ["girishpunglia@gmail.com", "sales@vaastumarble.com"],
+  emails: [
+    "girishpunglia@gmail.com",
+    "sales@vaastumarble.com",
+  ],
 
   phones: [
     {
@@ -37,7 +43,9 @@ export const contactData = {
     },
   ],
 
-  privacyPolicy: "https://vaastumarble.com/privacy_policy.html",
+  privacyPolicy:
+    "https://vaastumarble.com/privacy_policy.html",
 
-  terms: "https://www.vaastumarble.com/terms&conditions.html",
+  terms:
+    "https://www.vaastumarble.com/terms&conditions.html",
 };

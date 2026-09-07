@@ -1,8 +1,31 @@
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { MapPin, Phone, Mail, Users } from "lucide-react";
 
 const ContactHero = () => {
   const navigate = useNavigate();
+  const contactItems = [
+    {
+      icon: MapPin,
+      title: "VISIT OUR",
+      subtitle: "SHOWROOMS",
+    },
+    {
+      icon: Phone,
+      title: "CALL",
+      subtitle: "OUR TEAM",
+    },
+    {
+      icon: Mail,
+      title: "EMAIL",
+      subtitle: "US ANYTIME",
+    },
+    {
+      icon: Users,
+      title: "DISCUSS",
+      subtitle: "YOUR PROJECT",
+    },
+  ];
 
   return (
     <Box
@@ -63,7 +86,7 @@ const ContactHero = () => {
             },
           }}
         >
-         HOME
+          HOME
         </Typography>
         {/* SLASH */}
         <Typography
@@ -111,45 +134,277 @@ const ContactHero = () => {
         sx={{
           position: "relative",
           width: "100%",
-          height: {
-            xs: "280px",
-            sm: "360px",
-            md: "430px",
-            lg: "400px",
-          },
           overflow: "hidden",
-          margin: 0,
-          padding: 0,
         }}
       >
+        {/* BACKGROUND IMAGE */}
         <Box
           component="img"
           src="/images/background/contact-hero.png"
-          alt="Exclusive Collection"
+          alt="Vaastu contact showroom"
           sx={{
-            display: "block",
+            position: "absolute",
+            inset: 0,
             width: "100%",
             height: "100%",
+            display: "block",
             objectFit: "cover",
-            objectPosition: "top",
-            maxWidth: "none",
-            margin: 0,
-            padding: 0,
+            objectPosition: {
+              xs: "58% center",
+              sm: "58% center",
+              md: "center",
+            },
           }}
         />
 
-        {/* =========================================
-            OVERLAY
-        ========================================= */}
+        {/* LIGHT OVERLAY */}
         <Box
           sx={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02) 60%, rgba(0,0,0,0.08))",
-            pointerEvents: "none",
+            background: {
+              xs: `
+          linear-gradient(
+            180deg,
+            rgba(250,246,239,0.92) 0%,
+            rgba(250,246,239,0.82) 52%,
+            rgba(250,246,239,0.25) 100%
+          )
+        `,
+              md: `
+          linear-gradient(
+            90deg,
+            rgba(250,246,239,0.90) 0%,
+            rgba(250,246,239,0.82) 38%,
+            rgba(250,246,239,0.15) 65%,
+            rgba(250,246,239,0.02) 100%
+          )
+        `,
+            },
           }}
         />
+
+        {/* CONTENT */}
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            width: "100%",
+            boxSizing: "border-box",
+
+            px: {
+              xs: "24px",
+              sm: "45px",
+              md: "70px",
+              lg: "7%",
+            },
+
+            py: {
+              xs: "50px",
+              sm: "55px",
+              md: "55px",
+            },
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+
+            maxWidth: {
+              xs: "100%",
+              md: "900px",
+            },
+          }}
+        >
+          {/* EYEBROW */}
+          <Typography
+            sx={{
+              fontFamily: "Arial, sans-serif",
+              fontSize: {
+                xs: "10px",
+                sm: "11px",
+                md: "12px",
+              },
+              fontWeight: 500,
+              letterSpacing: {
+                xs: "2.5px",
+                md: "3.5px",
+              },
+              color: "#5f5a52",
+              mb: {
+                xs: "12px",
+                md: "14px",
+              },
+            }}
+          >
+            LET&apos;S CONNECT
+          </Typography>
+
+          {/* TITLE */}
+          <Typography
+            component="h1"
+            sx={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: {
+                xs: "48px",
+                sm: "62px",
+                md: "72px",
+                lg: "76px",
+              },
+              lineHeight: 0.95,
+              fontWeight: 400,
+              letterSpacing: "-2.5px",
+              color: "#111",
+              m: 0,
+            }}
+          >
+            Get In Touch
+          </Typography>
+
+          {/* DESCRIPTION */}
+          <Typography
+            sx={{
+              mt: {
+                xs: "18px",
+                md: "20px",
+              },
+              maxWidth: {
+                xs: "100%",
+                sm: "600px",
+                md: "620px",
+              },
+              fontSize: {
+                xs: "13px",
+                sm: "15px",
+                md: "17px",
+              },
+              lineHeight: 1.5,
+              fontWeight: 600,
+              color: "#292722",
+            }}
+          >
+            We&apos;d love to hear from you. Visit our showrooms, call us or
+            <br />
+            reach out via email — our team is here to assist you.
+          </Typography>
+
+          {/* GOLD LINE */}
+          <Box
+            sx={{
+              width: {
+                xs: "45px",
+                md: "58px",
+              },
+              height: "3px",
+              backgroundColor: "#967143",
+              mt: {
+                xs: "22px",
+                md: "28px",
+              },
+              mb: {
+                xs: "24px",
+                md: "28px",
+              },
+            }}
+          />
+
+          {/* CONTACT OPTIONS */}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "repeat(2, 1fr)",
+                sm: "repeat(4, 1fr)",
+              },
+              width: "100%",
+              maxWidth: {
+                xs: "100%",
+                sm: "650px",
+                md: "690px",
+              },
+            }}
+          >
+            {contactItems.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <Box
+                  key={item.title}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: {
+                      xs: "10px",
+                      sm: "12px",
+                    },
+
+                    minHeight: {
+                      xs: "80px",
+                      sm: "88px",
+                    },
+
+                    pl: {
+                      xs: index % 2 === 0 ? 0 : "18px",
+                      sm: index === 0 ? 0 : "32px",
+                    },
+
+                    borderLeft: {
+                      xs:
+                        index % 2 !== 0
+                          ? "1px solid rgba(80,75,68,0.12)"
+                          : "none",
+
+                      sm:
+                        index !== 0 ? "2px solid rgba(80,75,68,0.12)" : "none",
+                    },
+                  }}
+                >
+                  <Icon size={38} strokeWidth={1.5} color="#967143" />
+
+                  <Box sx={{ pt: "2px" }}>
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          xs: "9px",
+                          sm: "10px",
+                          md: "11px",
+                        },
+                        lineHeight: 1.5,
+                        fontWeight: 600,
+                        letterSpacing: {
+                          xs: "1.2px",
+                          md: "1.5px",
+                        },
+                        color: "#34312d",
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          xs: "9px",
+                          sm: "10px",
+                          md: "11px",
+                        },
+                        lineHeight: 1.5,
+                        fontWeight: 600,
+                        letterSpacing: {
+                          xs: "1.2px",
+                          md: "1.5px",
+                        },
+                        color: "#34312d",
+                      }}
+                    >
+                      {item.subtitle}
+                    </Typography>
+                  </Box>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );

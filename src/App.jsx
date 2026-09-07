@@ -12,7 +12,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useEffect } from "react";
-import ProductIndex from "./components/Pages/Products/ProductIndex";
 import AllProductsIndex from "./components/Pages/Products/AllProducts/AllProductsIndex";
 import ProductDetailIndex from "./components/Pages/Products/ProductDetail/ProductDetailIndex";
 import { allProducts } from "./components/Pages/Products/AllProducts/allProductsData";
@@ -21,6 +20,7 @@ import MinesIndex from "./components/Pages/Mines/MinesIndex";
 import ItalianMarbleApplications from "./components/Pages/Products/Applications/ItalianMarbleApplications";
 import StoreIndex from "./components/Pages/StoreLocator/StoreIndex";
 import ScrollToTop from "./components/Custom/ScrollToTop";
+import SelectedProductIndex from "./components/Pages/Products/SelectedProduct/SelectedProductIndex";
 
 const pageTitles = {
   // Home
@@ -54,7 +54,10 @@ const getProductDetailTitle = (pathname) => {
   const match = pathname.match(/^\/products\/([^/]+)$/);
   if (!match) return null;
 
-  const product = allProducts.find((item) => String(item.id) === match[1]);
+  const product = allProducts.find(
+    (item) => String(item.id) === match[1]
+  );
+
   return product ? `${product.name} | VAASTU` : null;
 };
 
@@ -86,11 +89,13 @@ function App() {
           <Route path="/store-locator" element={<StoreIndex />} />
           {/* Products */}
           <Route path="/products" element={<AllProductsIndex />} />
-          <Route path="/products/:id" element={<ProductDetailIndex />} />
-          <Route path="/products/indian-marbles" element={<ProductIndex />} />
-          <Route path="/products/italian-marbles" element={<ProductIndex />} />
-          <Route path="/products/indian-granite" element={<ProductIndex />} />
-          <Route path="/products/italian-granite" element={<ProductIndex />} />
+          <Route path="/products/:slug" element={<ProductDetailIndex />} />
+          <Route path="/products/elevation" element={<SelectedProductIndex />} />
+          <Route path="/products/granite" element={<SelectedProductIndex />} />
+          <Route path="/products/onyx" element={<SelectedProductIndex />} />
+          <Route path="/products/italian-marble" element={<SelectedProductIndex />} />
+          <Route path="/products/exotic" element={<SelectedProductIndex />} />
+          <Route path="/products/quartz" element={<SelectedProductIndex />} />
           <Route path="/application-of-italian-marble" element={<ItalianMarbleApplications />} />
           {/* Exotic */}
           <Route path="/exotic/antico-gold" element={<ExoticIndex />} />

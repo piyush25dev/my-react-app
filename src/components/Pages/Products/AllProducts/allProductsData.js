@@ -15,11 +15,12 @@ export const allProducts = catalogueData;
 export const CATEGORY_NAV = [
   "Italian Marble",
   "Granite",
-  "Imported Granite",
+  // "Imported Granite",
   "Quartz",
-  "Quartzite",
+  // "Quartzite",
   "Onyx",
   "Elevation",
+  "Exotic",
 ];
 
 export function getCategoryCounts(products) {
