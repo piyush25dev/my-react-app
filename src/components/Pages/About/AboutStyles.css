@@ -1,0 +1,21 @@
+/* Scoped to the About page redesign only. */
+
+@keyframes about-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.about-kenburns {
+  animation: about-kenburns 22s ease-in-out infinite alternate;
+}
+
+.about-gold-rule {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: #c6a97c;
+}

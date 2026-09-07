@@ -1,0 +1,40 @@
+/* Slow continuous zoom/pan on the hero background images */
+@keyframes hero-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+
+.hero-kenburns {
+  animation: hero-kenburns 24s ease-in-out infinite alternate;
+}
+
+/* Crossfade slideshow: slides are stacked and faded via opacity only —
+   no layout shift, no page reload, no abrupt swap. */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2.2s ease-in-out;
+}
+
+.hero-slide-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Diagonal dark panel on the left, softly feathered into the image
+   along its slanted right edge. */
+.hero-diagonal {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.64) 68%,
+    rgba(0, 0, 0, 0.55) 86%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  clip-path: polygon(0 0, 72% 0, 100% 100%, 0 100%);
+}

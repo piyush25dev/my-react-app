@@ -3,41 +3,38 @@ export const contactData = {
 
   offices: [
     {
-      title: "Office Location",
+      title: "Showroom - Karmanghat",
       company: "Vaastu Marble & Granites Pvt.Ltd",
       address: [
-        "Opp.Ayyappa Swamy temple, Karmanghat,",
+        "Opposite to Ayyappa Temple,",
+        "Gayathri Nagar, Karmanghat,",
         "Hyderabad - 500079",
         "Telangana, India",
-        "From LB Nagar: 1km",
       ],
     },
     {
-      title: "Factory Location-1",
-      company: "Punglia Marble Pvt.Ltd",
+      title: "Showroom - Shamshabad",
+      company: "Vaastu Marble & Granites Pvt.Ltd",
       address: [
-        "F-30, New RIICO Industrial Area,",
-        "Chittorgarh, Rajasthan-312001.",
-      ],
-    },
-    {
-      title: "Factory Location-2",
-      company: "Himalayan Onyx Pvt.Ltd",
-      address: [
-        "Near Mandalda Village",
-        "Chittorgarh, Rajasthan-312001.",
+        "National Highway 44,",
+        "Pashambanda, Shamshabad,",
+        "Telangana - 501218",
+        "India",
       ],
     },
   ],
 
-  emails: [
-    "girishpunglia@gmail.com",
-    "sales@vaastumarble.com",
-  ],
+  emails: ["girishpunglia@gmail.com", "sales@vaastumarble.com"],
 
   phones: [
-    "+91 9391930777",
-    "+91 9414109808",
+    {
+      number: "+91 9414109808",
+      whatsapp: true,
+    },
+    {
+      number: "+91 9391930777",
+      whatsapp: false,
+    },
   ],
 
   privacyPolicy: "https://vaastumarble.com/privacy_policy.html",

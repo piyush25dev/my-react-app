@@ -12,23 +12,150 @@ const ContactForm = () => {
     message: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const [accepted, setAccepted] = useState(false);
+  const [acceptedError, setAcceptedError] = useState("");
+
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "name":
+        if (!value.trim()) {
+          error = "Name is required.";
+        } else if (value.trim().length < 2) {
+          error = "Name must be at least 2 characters.";
+        } else if (!/^[a-zA-Z\s.'-]+$/.test(value.trim())) {
+          error = "Please enter a valid name.";
+        }
+        break;
+
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required.";
+        } else if (
+          !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())
+        ) {
+          error = "Please enter a valid email address.";
+        }
+        break;
+
+      case "mobile":
+        if (!value.trim()) {
+          error = "Mobile number is required.";
+        } else if (!/^[6-9]\d{9}$/.test(value.trim())) {
+          error = "Please enter a valid 10-digit mobile number.";
+        }
+        break;
+
+      case "message":
+        if (!value.trim()) {
+          error = "Message is required.";
+        } else if (value.trim().length < 10) {
+          error = "Message must be at least 10 characters.";
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    return error;
+  };
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    // Mobile: allow only numbers
+    if (name === "mobile") {
+      const numericValue = value.replace(/\D/g, "").slice(0, 10);
+
+      setFormData((prev) => ({
+        ...prev,
+        [name]: numericValue,
+      }));
+
+      const error = validateField(name, numericValue);
+
+      setErrors((prev) => ({
+        ...prev,
+        [name]: error,
+      }));
+
+      return;
+    }
 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    const error = validateField(name, value);
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error,
+    }));
+  };
+
+
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+
+    const error = validateField(name, value);
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error,
+    }));
+  };
+
+
+  const handleAcceptedChange = (event) => {
+    const checked = event.target.checked;
+
+    setAccepted(checked);
+
+    if (checked) {
+      setAcceptedError("");
+    } else {
+      setAcceptedError(
+        "Please accept the Privacy Policy and Terms & Conditions."
+      );
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const newErrors = {};
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    setErrors(newErrors);
+
     if (!accepted) {
+      setAcceptedError(
+        "Please accept the Privacy Policy and Terms & Conditions."
+      );
+    } else {
+      setAcceptedError("");
+    }
+
+    // Stop submission if there are errors
+    if (Object.keys(newErrors).length > 0 || !accepted) {
       return;
     }
+
+    // API CALL
 
     console.log("Form Data:", formData);
 
@@ -39,21 +166,37 @@ const ContactForm = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
+      noValidate
       sx={{
         width: "100%",
       }}
     >
-      {/* Name */}
+
       <Box sx={{ mb: { xs: 5, md: 6 } }}>
         <FormField
           label="Name"
           name="name"
           value={formData.name}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
+
+        {errors.name && (
+          <Typography
+            sx={{
+              mt: 1,
+              fontSize: {
+                xs: "12px",
+                md: "13px",
+              },
+              color: "#9d8974",
+            }}
+          >
+            {errors.name}
+          </Typography>
+        )}
       </Box>
 
-      {/* Email + Mobile */}
       <Box
         sx={{
           display: "grid",
@@ -76,35 +219,92 @@ const ContactForm = () => {
           },
         }}
       >
-        <FormField
-          label="Email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+        {/* EMAIL */}
+        <Box>
+          <FormField
+            label="Email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
 
-        <FormField
-          label="Mobile"
-          name="mobile"
-          value={formData.mobile}
-          onChange={handleChange}
-        />
+          {errors.email && (
+            <Typography
+              sx={{
+                mt: 1,
+                fontSize: {
+                  xs: "12px",
+                  md: "13px",
+                },
+                color: "#9d8974",
+              }}
+            >
+              {errors.email}
+            </Typography>
+          )}
+        </Box>
+
+        {/* MOBILE */}
+
+        <Box>
+          <FormField
+            label="Mobile"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            inputProps={{
+              maxLength: 10,
+              inputMode: "numeric",
+            }}
+          />
+
+          {errors.mobile && (
+            <Typography
+              sx={{
+                mt: 1,
+                fontSize: {
+                  xs: "12px",
+                  md: "13px",
+                },
+                color: "#9d8974",
+              }}
+            >
+              {errors.mobile}
+            </Typography>
+          )}
+        </Box>
       </Box>
 
-      {/* Message */}
       <Box sx={{ mb: { xs: 4, md: 5 } }}>
         <FormField
           label="Message"
           name="message"
           value={formData.message}
           onChange={handleChange}
+          onBlur={handleBlur}
           multiline
           rows={6}
           fullWidth
         />
+
+        {errors.message && (
+          <Typography
+            sx={{
+              mt: 1,
+              fontSize: {
+                xs: "12px",
+                md: "13px",
+              },
+              color: "#9d8974",
+            }}
+          >
+            {errors.message}
+          </Typography>
+        )}
       </Box>
 
-      {/* Privacy */}
       <Box
         sx={{
           display: "flex",
@@ -113,12 +313,12 @@ const ContactForm = () => {
             xs: 1,
             md: 1.5,
           },
-          mb: 2,
+          mb: 1,
         }}
       >
         <Checkbox
           checked={accepted}
-          onChange={(event) => setAccepted(event.target.checked)}
+          onChange={handleAcceptedChange}
           icon={
             <Box
               sx={{
@@ -147,7 +347,12 @@ const ContactForm = () => {
                 boxSizing: "border-box",
               }}
             >
-              <Icon icon="mdi:check" width="20" height="20" color="#fff" />
+              <Icon
+                icon="mdi:check"
+                width="20"
+                height="20"
+                color="#fff"
+              />
             </Box>
           }
           sx={{
@@ -201,7 +406,24 @@ const ContactForm = () => {
         </Typography>
       </Box>
 
-      {/* Required */}
+      {/* PRIVACY ERROR */}
+
+      {acceptedError && (
+        <Typography
+          sx={{
+            mt: 1,
+            mb: 2,
+            fontSize: {
+              xs: "12px",
+              md: "13px",
+            },
+            color: "#9d8974",
+          }}
+        >
+          {acceptedError}
+        </Typography>
+      )}
+
       <Typography
         sx={{
           fontSize: {
@@ -215,7 +437,6 @@ const ContactForm = () => {
         * Required fields
       </Typography>
 
-      {/* Submit */}
       <Box
         sx={{
           display: "flex",
@@ -228,7 +449,6 @@ const ContactForm = () => {
       >
         <Button
           type="submit"
-          disabled={!accepted}
           disableRipple
           sx={{
             minWidth: "auto",

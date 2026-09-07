@@ -1,0 +1,39 @@
+/* Scoped to the Product Detail page redesign only. */
+
+@keyframes pd-image-in {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pd-image-in {
+  animation: pd-image-in 650ms ease both;
+}
+
+@keyframes pd-info-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pd-info-in {
+  animation: pd-info-in 650ms ease 120ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-image-in,
+  .pd-info-in {
+    animation: none !important;
+    transform: none !important;
+  }
+}

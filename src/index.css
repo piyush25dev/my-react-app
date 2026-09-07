@@ -1,3 +1,11 @@
+@import "tailwindcss";
 body {
   margin: 0;
+  overflow-x: hidden;
+  /* cursor: pointer; */
+}
+
+/* Editorial serif used by the homepage headlines only */
+.font-display {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
 }

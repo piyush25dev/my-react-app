@@ -48,8 +48,8 @@ const TexturesCollection = () => {
         >
           <Box
             component="img"
-            src="/images/about/story2.jpg"
-            alt="Antolini Textures+ Collection"
+            src="/images/about/story2.png"
+            alt="Vaastu Textures+ Collection"
             sx={{
               position: "absolute",
 
@@ -112,7 +112,7 @@ const TexturesCollection = () => {
                   "0 1px 5px rgba(0,0,0,0.35)",
               }}
             >
-              Antolini® Textures+ Collection
+              Vaastu® Textures+ Collection
             </Typography>
 
             {/* SUBTITLE */}

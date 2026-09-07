@@ -76,7 +76,7 @@ const TeamSection = () => {
           <Box
             component="img"
             src="/images/about/group.png"
-            alt="Antolini team"
+            alt="Vaastu team"
             sx={{
               display: "block",
               width: "100%",

@@ -21,12 +21,7 @@ const DiscoverSection = () => {
         sx={{
           maxWidth: "1400px",
           mx: "auto",
-
-          px: {
-            xs: 2,
-            sm: 3,
-            md: 4,
-          },
+          px: 3,
         }}
       >
         <Box

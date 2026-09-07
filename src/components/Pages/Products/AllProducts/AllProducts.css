@@ -1,0 +1,170 @@
+/* Scoped to the All Products page redesign only. */
+
+@keyframes ap-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.ap-kenburns {
+  animation: ap-kenburns 26s ease-in-out infinite alternate;
+}
+
+.ap-gold-rule {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: #c6a97c;
+}
+
+@keyframes ap-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ap-card-enter {
+  animation: ap-fade-in 500ms ease both;
+}
+
+.ap-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: #ececec;
+}
+
+.ap-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: ap-shimmer-sweep 1.6s ease-in-out infinite;
+}
+
+@keyframes ap-shimmer-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ap-card-image {
+  transition: transform 550ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.ap-card:hover .ap-card-image {
+  transform: scale(1.06);
+}
+
+.ap-card-title {
+  transition: transform 450ms ease, color 450ms ease;
+}
+
+.ap-card:hover .ap-card-title {
+  transform: translateX(4px);
+  color: #8a7358;
+}
+
+.ap-card-arrow {
+  transition: transform 450ms ease, color 450ms ease;
+}
+
+.ap-card:hover .ap-card-arrow {
+  transform: translateX(6px);
+  color: #c6a97c;
+}
+
+.ap-card-body {
+  transition: transform 450ms ease;
+}
+
+.ap-card:hover .ap-card-body {
+  transform: translateY(-4px);
+}
+
+.ap-card-gold-edge {
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  transition: border-color 450ms ease;
+  pointer-events: none;
+}
+
+.ap-card:hover .ap-card-gold-edge {
+  border-color: rgba(198, 169, 124, 0.55);
+}
+
+@keyframes ap-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ap-hero-in {
+  animation: ap-hero-in 700ms ease both;
+}
+
+@keyframes ap-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ap-dropdown {
+  animation: ap-dropdown-in 200ms ease both;
+}
+
+@keyframes ap-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.ap-sheet-in {
+  animation: ap-sheet-in 320ms cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+/* Respect the user's motion preference across the whole Products section. */
+@media (prefers-reduced-motion: reduce) {
+  .ap-kenburns,
+  .ap-hero-in,
+  .ap-card-enter,
+  .ap-card-image,
+  .ap-card-title,
+  .ap-card-arrow,
+  .ap-card-body,
+  .ap-card-gold-edge,
+  .ap-dropdown,
+  .ap-sheet-in,
+  .ap-shimmer::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

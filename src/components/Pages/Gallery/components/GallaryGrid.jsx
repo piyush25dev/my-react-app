@@ -6,21 +6,18 @@ import {
   MenuItem,
   Select,
   Typography,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
+import { Icon } from "@iconify/react";
 
 import { catalogueData } from "../../../Data/Gallery";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../../Custom/ProductCard";
 
 const GalleryGrid = () => {
   const [category, setCategory] = useState("");
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedType, setSelectedType] = useState("FULL");
-
-  /*
-   * =====================================================
-   * FILTER PRODUCTS
-   * =====================================================
-   */
 
   const filteredProducts = useMemo(() => {
     return catalogueData.filter((product) => {
@@ -34,12 +31,6 @@ const GalleryGrid = () => {
       return categoryMatch && colorMatch && typeMatch;
     });
   }, [category, selectedColor, selectedType]);
-
-  /*
-   * =====================================================
-   * COLORS
-   * =====================================================
-   */
 
   const colors = [
     {
@@ -88,13 +79,12 @@ const GalleryGrid = () => {
     },
   ];
 
-  /*
-   * =====================================================
-   * CATEGORIES
-   * =====================================================
-   */
-
   const categories = [...new Set(catalogueData.map((item) => item.category))];
+
+  // Clear color filter
+  const clearColorFilter = () => {
+    setSelectedColor(null);
+  };
 
   return (
     <Box
@@ -126,9 +116,6 @@ const GalleryGrid = () => {
           },
         }}
       >
-        {/* =================================================
-            HEADER
-        ================================================= */}
         <Typography
           sx={{
             fontFamily: "Arial, sans-serif",
@@ -149,9 +136,6 @@ const GalleryGrid = () => {
           Catalogue Exclusive Collection
         </Typography>
 
-        {/* =============================================
-            FILTERS
-        ============================================= */}
         <Box
           sx={{
             display: "flex",
@@ -186,10 +170,7 @@ const GalleryGrid = () => {
             <FormControl
               size="small"
               sx={{
-                minWidth: {
-                  xs: 140,
-                  sm: 180,
-                },
+                minWidth: {xs: 140, sm: 180},
               }}
             >
               <Select
@@ -201,17 +182,25 @@ const GalleryGrid = () => {
                   backgroundColor: "#fff",
                   borderRadius: "3px",
                   fontSize: "13px",
+                  color: "#5c5047",
                   "& .MuiSelect-select": {
                     py: 0.5,
+                    color: "#5c5047",
                   },
-                  "& fieldset": {
-                    border: "2px solid #1d1d1d",
+                  "& .MuiSelect-icon": {
+                    color: "#806c5d",
                   },
-                  "&:hover fieldset": {
-                    border: "2px solid #1d1d1d",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #CFCAC3",
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid #1d1d1d",
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #CFCAC3",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #CFCAC3",
+                  },
+                  "&.Mui-focused": {
+                    color: "#5c5047",
                   },
                 }}
               >
@@ -225,9 +214,6 @@ const GalleryGrid = () => {
             </FormControl>
           </Box>
 
-          {/* =========================================
-              SEPARATOR
-          ========================================= */}
           <Box
             sx={{
               width: "1px",
@@ -240,9 +226,6 @@ const GalleryGrid = () => {
             }}
           />
 
-          {/* =========================================
-              COLOR
-          ========================================= */}
           <Box
             sx={{
               display: "flex",
@@ -263,53 +246,80 @@ const GalleryGrid = () => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: {
-                  xs: 1,
-                  sm: 1.4,
-                },
-                flexWrap: "wrap"
+                gap: {xs: 1, sm: 1.4},
+                flexWrap: "wrap",
               }}
             >
               {colors.map((color) => (
-                <Box
+                <Tooltip
                   key={color.name}
-                  onClick={() =>
-                    setSelectedColor(
-                      selectedColor === color.name ? null : color.name
-                    )
-                  }
-                  sx={{
-                    width: {
-                      xs: "16px",
-                      sm: "18px",
-                    },
-
-                    height: {
-                      xs: "16px",
-                      sm: "18px",
-                    },
-                    borderRadius: "50%",
-                    backgroundColor: color.value,
-                    cursor: "pointer",
-                    border:
-                      color.name === "white" ? "1px solid #ccc" : "none",
-                    boxShadow:
-                      selectedColor === color.name
-                        ? "0 0 0 2px #fff, 0 0 0 3px #a7957f"
-                        : "0 1px 4px rgba(0,0,0,0.15)",
-                    transition: "all 180ms ease",
-                    "&:hover": {
-                      transform: "scale(1.15)",
-                    },
-                  }}
-                />
+                  title={color.name.toUpperCase()}
+                  arrow
+                  placement="top"
+                >
+                  <Box
+                    onClick={() =>
+                      setSelectedColor(
+                        selectedColor === color.name ? null : color.name,
+                      )
+                    }
+                    sx={{
+                      width: { xs: "16px", sm: "18px"},
+                      height: { xs: "16px", sm: "18px"},
+                      borderRadius: "50%",
+                      backgroundColor: color.value,
+                      cursor: "pointer",
+                      border: color.name === "white" ? "1px solid #ccc" : "none",
+                      boxShadow:
+                        selectedColor === color.name
+                          ? "0 0 0 2px #fff, 0 0 0 3px #a7957f"
+                          : "0 1px 4px rgba(0,0,0,0.15)",
+                      transition: "all 180ms ease",
+                      "&:hover": {
+                        transform: "scale(1.15)",
+                      },
+                    }}
+                  />
+                </Tooltip>
               ))}
+
+              {/* Reset/Clear Color Button */}
+              {selectedColor && (
+                <IconButton
+                  onClick={clearColorFilter}
+                  size="small"
+                  sx={{
+                    ml: 0.5,
+                    width: {
+                      xs: "20px",
+                      sm: "22px",
+                    },
+                    height: {
+                      xs: "20px",
+                      sm: "22px",
+                    },
+                    backgroundColor: "#f5f5f5",
+                    border: "1px solid #ddd",
+                    "&:hover": {
+                      backgroundColor: "#e8e8e8",
+                      transform: "rotate(90deg)",
+                    },
+                    transition: "all 200ms ease",
+                    padding: 0,
+                  }}
+                  aria-label="Clear color filter"
+                >
+                  <Icon
+                    icon="material-symbols:close"
+                    width="14"
+                    height="14"
+                    style={{ color: "#666" }}
+                  />
+                </IconButton>
+              )}
             </Box>
           </Box>
 
-          {/* =========================================
-              SEPARATOR
-          ========================================= */}
           <Box
             sx={{
               width: "1px",
@@ -321,10 +331,6 @@ const GalleryGrid = () => {
               },
             }}
           />
-
-          {/* =========================================
-              MATERIAL / LIFESTYLE
-          ========================================= */}
 
           <Box
             sx={{
@@ -362,9 +368,6 @@ const GalleryGrid = () => {
             ))}
           </Box>
 
-          {/* =========================================
-              SEPARATOR
-          ========================================= */}
           <Box
             sx={{
               width: "1px",
@@ -376,10 +379,6 @@ const GalleryGrid = () => {
               },
             }}
           />
-
-          {/* =========================================
-              FULL BUTTON
-          ========================================= */}
 
           <Box
             onClick={() => setSelectedType("FULL")}
@@ -424,10 +423,6 @@ const GalleryGrid = () => {
           </Box>
         </Box>
 
-        {/* =================================================
-            PRODUCT GRID
-        ================================================= */}
-
         <Box
           sx={{
             display: "grid",
@@ -447,10 +442,6 @@ const GalleryGrid = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </Box>
-
-        {/* =================================================
-            EMPTY STATE
-        ================================================= */}
 
         {filteredProducts.length === 0 && (
           <Box

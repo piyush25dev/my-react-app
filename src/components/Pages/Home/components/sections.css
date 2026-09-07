@@ -1,0 +1,44 @@
+/* Shared visual language for the homepage sections (dark charcoal /
+   ivory / champagne editorial theme). Kept separate from Hero.css so
+   any section can reuse the same slow zoom + hairline utilities. */
+
+@keyframes section-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.section-zoom {
+  animation: section-kenburns 22s ease-in-out infinite;
+}
+
+.section-zoom-slow {
+  animation: section-kenburns 30s ease-in-out infinite;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 34s linear infinite;
+}
+
+/* thin gold hairline used as a section eyebrow accent */
+.gold-rule {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: #a4866e;
+}

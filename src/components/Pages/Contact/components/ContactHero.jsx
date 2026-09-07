@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ContactHero = () => {
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -39,23 +39,19 @@ const ContactHero = () => {
       >
         <Typography
           component="button"
-        //   onClick={() => navigate("/collection")}
+          onClick={() => navigate("/")}
           sx={{
             border: 0,
             background: "transparent",
             padding: 0,
             margin: 0,
-
             cursor: "pointer",
-
             fontFamily: "Arial, sans-serif",
-
             fontSize: {
               xs: "11px",
               sm: "12px",
               md: "14px",
             },
-
             letterSpacing: {
               xs: "1.2px",
               md: "2px",
@@ -67,7 +63,43 @@ const ContactHero = () => {
             },
           }}
         >
-          Contact
+         HOME
+        </Typography>
+        {/* SLASH */}
+        <Typography
+          component="span"
+          sx={{
+            fontSize: {
+              xs: "15px",
+              md: "18px",
+            },
+            color: "#806c5d",
+            fontWeight: 300,
+            lineHeight: 1,
+          }}
+        >
+          /
+        </Typography>
+        {/* CURRENT PAGE */}
+        <Typography
+          component="span"
+          sx={{
+            fontFamily: "Arial, sans-serif",
+            fontSize: {
+              xs: "11px",
+              sm: "12px",
+              md: "14px",
+            },
+            letterSpacing: {
+              xs: "1.2px",
+              md: "2px",
+            },
+            color: "#806c5d",
+            fontWeight: 400,
+            whiteSpace: "nowrap",
+          }}
+        >
+          CONTACT US
         </Typography>
       </Box>
 
@@ -92,14 +124,14 @@ const ContactHero = () => {
       >
         <Box
           component="img"
-          src="/images/gallery/thumb.jpg"
+          src="/images/background/contact-hero.png"
           alt="Exclusive Collection"
           sx={{
             display: "block",
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "top",
             maxWidth: "none",
             margin: 0,
             padding: 0,
