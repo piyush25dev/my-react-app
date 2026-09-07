@@ -208,7 +208,7 @@ const Navbar = () => {
           style={{
             paddingLeft: "24px",
             paddingRight: "24px",
-            paddingBottom: "48px",
+            paddingBottom: "28px",
           }}
         >
           {/* Main Navigation */}
