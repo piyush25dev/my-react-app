@@ -72,7 +72,7 @@ const Navbar = () => {
   return (
     <header
       className={`
-        fixed left-0 top-0 z-50 w-full
+        fixed left-0 top-0 z-[9999] w-full
         transition-all ${TRANSITION}
         ${
           shouldHaveWhiteBackground
@@ -91,7 +91,7 @@ const Navbar = () => {
       {/* Top row */}
       <div
         className="
-          relative z-20
+          relative z-[9998]
           flex h-22 w-full
           items-center justify-between
         "
@@ -176,7 +176,7 @@ const Navbar = () => {
       {/* Dropdown panel */}
       <div
         className={`
-          absolute left-0 top-full z-10
+          absolute left-0 top-full z-[9997]
           w-full overflow-y-auto overflow-x-hidden
           md:overflow-visible
           bg-white shadow-lg
@@ -184,8 +184,8 @@ const Navbar = () => {
 
           ${
             menuOpen
-              ? "border-t border-neutral-100 opacity-100"
-              : "max-h-0 opacity-0"
+              ? "border-t border-neutral-100 opacity-100 pointer-events-auto"
+              : "max-h-0 opacity-0 pointer-events-none"
           }
         `}
         style={{
@@ -409,7 +409,7 @@ const Navbar = () => {
                       md:absolute
                       md:top-full
                       md:left-0
-                      md:z-30
+                      md:z-[9996]
                       md:block
                       md:w-max
                       md:pt-3

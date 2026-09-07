@@ -1,10 +1,14 @@
 import { useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, MapPin, Send } from "lucide-react";
-import { allProducts, getRelatedProducts } from "../AllProducts/allProductsData";
+import {
+  allProducts,
+  getRelatedProducts,
+} from "../AllProducts/allProductsData";
 import StoneCard from "../AllProducts/components/StoneCard";
 import "../AllProducts/AllProducts.css";
 import "./ProductDetail.css";
+import { createSlug } from "../../../../utils/createSlug";
 
 const FALLBACK_IMAGE = "/images/placeholder-stone.svg";
 
@@ -27,23 +31,39 @@ const ProductImage = ({ product }) => {
           imageLoaded ? "opacity-100" : "opacity-0"
         }`}
       />
-      {!imageLoaded && <div className="ap-shimmer absolute inset-0" aria-hidden="true" />}
+      {!imageLoaded && (
+        <div className="ap-shimmer absolute inset-0" aria-hidden="true" />
+      )}
     </div>
   );
 };
 
 const ProductDetailIndex = () => {
-  const { id } = useParams();
+   const { slug } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const product = useMemo(
-    () => allProducts.find((item) => String(item.id) === id),
-    [id]
+    () => allProducts.find((item) => createSlug(item.name) === slug),
+    [slug],
   );
 
   const relatedProducts = useMemo(
     () => (product ? getRelatedProducts(product, allProducts, 4) : []),
-    [product]
+    [product],
   );
+
+  const handleWhatsAppEnquiry = () => {
+    const productUrl = `${window.location.origin}${location.pathname}`;
+
+    const message = `Hi, I am interested in your product from your *Online Store* - *${product.name}*. Quantity: *1* Product Link: ${productUrl} Please provide more details.`;
+
+    const whatsappUrl = `https://wa.me/919414109808?text=${encodeURIComponent(
+      message,
+    )}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
 
   if (!product) {
     return (
@@ -54,13 +74,14 @@ const ProductDetailIndex = () => {
         <p className="text-[13px] font-light text-[#7a8792]">
           This stone may have been removed from the collection.
         </p>
-        <Link
-          to="/products"
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
           className="mt-2 inline-flex items-center gap-2 text-[12px] font-medium tracking-[0.15em] text-[#8a7358] uppercase"
         >
           <ArrowLeft size={14} />
           Back to Collection
-        </Link>
+        </button>
       </div>
     );
   }
@@ -69,23 +90,31 @@ const ProductDetailIndex = () => {
     ? product.application.filter(Boolean)
     : [];
 
-  const hasDescription = Boolean(product.description && product.description.trim());
+  const hasDescription = Boolean(
+    product.description && product.description.trim(),
+  );
   const hasThickness = Boolean(product.quartzThickness);
   const hasGST = Boolean(product.additionalGST && product.additionalGST.trim());
-  const hasShipping = Boolean(product.shippingCharges && product.shippingCharges.trim());
+  const hasShipping = Boolean(
+    product.shippingCharges && product.shippingCharges.trim(),
+  );
   const hasSku = Boolean(product.sku && product.sku.trim());
   const hasProductDetails = hasThickness || hasGST || hasShipping || hasSku;
 
   return (
     <div className="bg-white">
       <div className="relative z-[60] border-b border-black/10 bg-white px-6 py-5 sm:px-10 md:px-16">
-        <Link
-          to="/products"
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
           className="group inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.2em] text-[#5c564d] uppercase transition-colors duration-300 hover:text-[#8a7358]"
         >
-          <ArrowLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
+          <ArrowLeft
+            size={14}
+            className="transition-transform duration-300 group-hover:-translate-x-1"
+          />
           Back to Collection
-        </Link>
+        </button>
       </div>
 
       <div className="flex flex-col gap-10 px-6 py-10 sm:px-10 md:px-16 md:py-14 lg:flex-row lg:items-start lg:gap-14">
@@ -138,11 +167,17 @@ const ProductDetailIndex = () => {
               </p>
               <dl className="flex flex-col gap-3">
                 {hasThickness && (
-                  <DetailRow label="Thickness" value={product.quartzThickness} />
+                  <DetailRow
+                    label="Thickness"
+                    value={product.quartzThickness}
+                  />
                 )}
                 {hasSku && <DetailRow label="SKU" value={product.sku} />}
                 {hasGST && (
-                  <DetailRow label="Additional GST" value={product.additionalGST} />
+                  <DetailRow
+                    label="Additional GST"
+                    value={product.additionalGST}
+                  />
                 )}
                 {hasShipping && (
                   <DetailRow label="Shipping" value={product.shippingCharges} />
@@ -152,13 +187,14 @@ const ProductDetailIndex = () => {
           )}
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={handleWhatsAppEnquiry}
               className="group inline-flex flex-1 items-center justify-center gap-2 bg-[#1a1a1a] px-6 py-3.5 text-[12px] font-medium tracking-[0.2em] text-white uppercase transition-colors duration-300 hover:bg-[#c6a97c] hover:text-[#1a1a1a]"
             >
               <Send size={14} />
               Enquire Now
-            </Link>
+            </button>
             <Link
               to="/store-locator"
               className="group inline-flex flex-1 items-center justify-center gap-2 border border-black/20 px-6 py-3.5 text-[12px] font-medium tracking-[0.2em] text-[#1a1a1a] uppercase transition-colors duration-300 hover:border-[#c6a97c] hover:text-[#8a7358]"

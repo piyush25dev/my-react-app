@@ -48,19 +48,27 @@ const navLinks = [
             },
             {
               label: "Elevation",
-              to: "/products",
+              to: "/products/elevation",
             },
             {
               label: "Exotic",
-              to: "/products",
+              to: "/products/exotic",
+            },
+            {
+              label: "Granite",
+              to: "/products/granite",
             },
             {
               label: "Italian Marble",
-              to: "/products/italian-marbles",
+              to: "/products/italian-marble",
+            },
+            {
+              label: "Onyx",
+              to: "/products/onyx",
             },
             {
               label: "Quartz",
-              to: "/products",
+              to: "/products/quartz",
             },
           ],
         },

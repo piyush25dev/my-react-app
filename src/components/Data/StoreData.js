@@ -13,6 +13,7 @@ const storeLocations = [
     mapAddress:
       "VAASTU ITALIAN MARBLE, Plot No.43 & 44, Survey No.44 & 48, Bairamalguda, Karmanghat, Hyderabad, Telangana 500079",
     mapUrl: "https://maps.app.goo.gl/TVdry3VT6aRUpR6C7",
+    image: "/images/contact/karmanghat.png",
   },
 
   {
@@ -29,6 +30,7 @@ const storeLocations = [
     mapAddress:
       "VAASTU ITALIAN MARBLE AIRPORT ROAD, National Highway 44, Pashambanda, Shamshabad, Telangana 501218",
     mapUrl: "https://g.co/kgs/KzJV6W",
+    image: "/images/contact/shamshabad.png",
   },
 ]; 
 

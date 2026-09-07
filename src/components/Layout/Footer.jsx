@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { MapPin, Phone, Mail, Globe } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { storeLocations } from "../Data/StoreData";
-import { contactData } from "../Data/contactData";
+// import { contactData } from "../Data/contactData";
 
 const quickLinks = [
   { label: "Home", to: "/" },
@@ -14,19 +14,20 @@ const quickLinks = [
 ];
 
 const productLinks = [
-  { label: "Italian Marbles", to: "/products/italian-marbles" },
-  { label: "Granite", to: "/products/indian-granite" },
-  { label: "Quartzite", to: "/gallery" },
-  { label: "Quartz", to: "/gallery" },
-  { label: "Natural Stones", to: "/gallery" },
-  { label: "Browse All", to: "/gallery" },
+  { label: "Elevation", to: "/products/elevation" },
+  { label: "Exotic", to: "/products/exotic" },
+  { label: "Granite", to: "/products/granite" },
+  { label: "Italian Marbles", to: "/products/italian-marble" },
+  { label: "Onyx", to: "/products/onyx" },
+  { label: "Quartz", to: "/products/quartz" },
+  { label: "Browse All", to: "/products" },
 ];
 
-const supportLinks = [
-  { label: "Enquiry", to: "/contact" },
-  { label: "Privacy Policy", href: contactData.privacyPolicy },
-  { label: "Terms & Conditions", href: contactData.terms },
-];
+// const supportLinks = [
+//   { label: "Enquiry", to: "/contact" },
+//   { label: "Privacy Policy", href: contactData.privacyPolicy },
+//   { label: "Terms & Conditions", href: contactData.terms },
+// ];
 
 const linkClasses =
   "text-[14px] text-[#fff] transition-colors duration-200 hover:text-[#a3282e]";
@@ -42,13 +43,13 @@ const Footer = () => {
       />
 
       <div className="relative px-6 py-6 sm:px-10 md:px-16 lg:px-24">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-10">
+          {/* Brand - Full width on mobile, normal on larger screens */}
+          <div className="col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1">
             <img
               src="/images/logo/logo-white.png"
               alt="Vaastu Italian Marble"
-              className=" w-[70%] object-contain"
+              className="w-[70%] object-contain"
             />
             {/* <p className="mt-6 text-[12px] leading-relaxed font-medium tracking-[0.2em] text-[#5c564d]">
               TIMELESS SURFACES
@@ -90,10 +91,9 @@ const Footer = () => {
           </nav>
 
           {/* Support */}
-        
 
           {/* Get In Touch */}
-          <div>
+          <div className="col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1">
             <h3 className="text-[12px] font-medium tracking-[0.25em] text-[#a3282e]">
               GET IN TOUCH
             </h3>
@@ -187,17 +187,26 @@ const Footer = () => {
               >
                 <Icon icon="mdi:whatsapp" width={20} height={20} />
               </a>
-
             </div>
           </div>
         </div>
 
-
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col gap-4 border-t border-[#1a1a1a]/10 pt-8 text-[11px] tracking-[0.08em] text-[#6b655c] sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Vaastu Italian Marble. All Rights Reserved.</p>
+        <div className="mt-14 flex flex-col gap-4 border-t border-[#fff]/10 pt-8 text-[11px] tracking-[0.08em] text-[#6b655c] sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} Vaastu Italian Marble. All Rights
+            Reserved.
+          </p>
+
           <p className="tracking-[0.15em]">
             EXQUISITE RANGE OF IMPORTED GRANITE • MARBLES • STONES
+          </p>
+
+          <p className="text-[#fff]">
+            Powered By{" "}
+            <span className="text-[#a3282e]">
+              Glansa Solutions Private Limited
+            </span>
           </p>
         </div>
       </div>
