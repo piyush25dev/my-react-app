@@ -74,12 +74,12 @@ function Hero() {
       {/* Content */}
       <div className="relative z-10 flex h-full w-full flex-col justify-end px-6 pb-16 sm:px-10 md:justify-center md:px-16 md:pb-0 lg:px-24">
         <div className="max-w-2xl">
-          <p className="mb-5 flex items-center gap-3 text-[11px] font-medium tracking-[0.35em] text-white/70 md:mb-7 md:text-[12px]">
-            <span className="h-px w-8 bg-[#c6a97c]" />
+          <p className="mb-5 flex items-center gap-3 text-[10px] font-medium tracking-[0.22em] text-white/70 sm:text-[11px] sm:tracking-[0.28em] md:mb-7 md:text-[12px] md:tracking-[0.35em]">
+            <span className="h-px w-6 shrink-0 bg-[#c6a97c] sm:w-8" />
             VAASTU ITALIAN MARBLE
           </p>
 
-          <h1 className="font-display text-[15vw] leading-[0.95] font-medium text-white sm:text-55px] md:text-[60px] lg:text-[65px]">
+          <h1 className="font-display text-[40px] leading-[0.95] font-medium text-white sm:text-45px] md:text-[40px] lg:text-[55px]">
             <span className="block">NATURAL STONE</span>
             <span className="block">FOR A BETTER</span>
             <span className="block text-[#d9c19a]">TOMORROW</span>

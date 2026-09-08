@@ -13,6 +13,8 @@ import "../AllProducts/AllProducts.css";
 import BreadcrumbBar from "./components/BreadcrumbBar";
 import ProductGrid from "./components/ProductGrid";
 import ProductsHero from "../AllProducts/components/ProductsHero";
+import CategoryNav from "../AllProducts/components/CategoryNav";
+
 
 const PAGE_SIZE = 24;
 const DEBOUNCE_MS = 300;
@@ -27,10 +29,20 @@ const ROUTE_CATEGORY_MAP = {
   elevation: "Elevation",
 };
 
+const GRANITE_NAV = [
+  "Granite Polish",
+  "Granite Lapatro",
+  "Granite Leather",
+];
+
 const getCategoryFromPath = (pathname) => {
   const slug = pathname.split("/").filter(Boolean).pop()?.toLowerCase();
 
   return ROUTE_CATEGORY_MAP[slug] || null;
+};
+
+const isGranitePath = (pathname) => {
+  return pathname.includes("/products/granite");
 };
 
 const SelectedProductIndex = () => {
@@ -45,7 +57,13 @@ const SelectedProductIndex = () => {
     [location.pathname],
   );
 
+  const isGraniteRoute = useMemo(
+    () => isGranitePath(location.pathname),
+    [location.pathname],
+  );
+
   const [selectedCategory, setSelectedCategory] = useState(undefined);
+  const [selectedGraniteType, setSelectedGraniteType] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedApplications, setSelectedApplications] = useState([]);
@@ -57,8 +75,11 @@ const SelectedProductIndex = () => {
 
   const transitionTimeoutRef = useRef(null);
 
-  const activeCategory =
-    selectedCategory === undefined ? routeCategory : selectedCategory;
+  // For granite route: use selectedGraniteType if set, otherwise use routeCategory
+  // For other routes: use selectedCategory if set, otherwise use routeCategory
+  const activeCategory = isGraniteRoute
+    ? selectedGraniteType || routeCategory
+    : selectedCategory === undefined ? routeCategory : selectedCategory;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -92,8 +113,22 @@ const SelectedProductIndex = () => {
     const term = debouncedSearch.trim().toLowerCase();
 
     const filtered = allProducts.filter((product) => {
-      const matchesCategory =
-        !activeCategory || product.category === activeCategory;
+      // For granite route: filter by subcategory if selected, otherwise show all granite products
+      // For other routes: filter by category
+      let matchesCategory;
+      
+      if (isGraniteRoute) {
+        // If a specific granite type is selected, filter by subcategory
+        if (selectedGraniteType) {
+          matchesCategory = product.subcategory === selectedGraniteType;
+        } else {
+          // If no type selected (All), show products from Granite category
+          matchesCategory = product.category === "Granite";
+        }
+      } else {
+        // Normal category filtering for non-granite routes
+        matchesCategory = !activeCategory || product.category === activeCategory;
+      }
 
       const matchesSearch =
         !term ||
@@ -140,6 +175,8 @@ const SelectedProductIndex = () => {
     selectedApplications,
     selectedThickness,
     sortBy,
+    isGraniteRoute,
+    selectedGraniteType,
   ]);
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
@@ -151,7 +188,11 @@ const SelectedProductIndex = () => {
   };
 
   const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
+    if (isGraniteRoute) {
+      setSelectedGraniteType(category);
+    } else {
+      setSelectedCategory(category);
+    }
     resetPaging();
     triggerTransition();
     setIsMobileFilterOpen(false);
@@ -190,7 +231,11 @@ const SelectedProductIndex = () => {
   };
 
   const handleClearFilters = () => {
-    setSelectedCategory(undefined);
+    if (isGraniteRoute) {
+      setSelectedGraniteType(null);
+    } else {
+      setSelectedCategory(undefined);
+    }
     setSearchInput("");
     setSelectedApplications([]);
     setSelectedThickness(null);
@@ -205,6 +250,15 @@ const SelectedProductIndex = () => {
       <ProductsHero />
 
       <BreadcrumbBar count={filteredProducts.length} title={activeCategory} />
+      
+      {/* Show CategoryNav only on granite route */}
+      {isGraniteRoute && (
+        <CategoryNav
+          categories={GRANITE_NAV}
+          activeCategory={activeCategory}
+          onSelect={handleCategorySelect}
+        />
+      )}
 
       <FilterBar
         searchTerm={searchInput}

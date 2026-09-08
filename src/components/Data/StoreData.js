@@ -29,7 +29,7 @@ const storeLocations = [
     instagram: "https://www.instagram.com/reel/CqvEWQ8hrxk/?igsh=bWJxdzB3N204MTAy",
     mapAddress:
       "VAASTU ITALIAN MARBLE AIRPORT ROAD, National Highway 44, Pashambanda, Shamshabad, Telangana 501218",
-    mapUrl: "https://g.co/kgs/KzJV6W",
+    mapUrl: "https://maps.app.goo.gl/au8hDofRdzx5a6Xg6",
     image: "/images/contact/shamshabad.png",
   },
 ]; 

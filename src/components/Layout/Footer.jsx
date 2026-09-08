@@ -204,9 +204,14 @@ const Footer = () => {
 
           <p className="text-[#fff]">
             Powered By{" "}
-            <span className="text-[#a3282e]">
+            <a
+              href="https://www.glansa.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#a3282e] transition-colors duration-200 hover:text-[#fff]"
+            >
               Glansa Solutions Private Limited
-            </span>
+            </a>
           </p>
         </div>
       </div>

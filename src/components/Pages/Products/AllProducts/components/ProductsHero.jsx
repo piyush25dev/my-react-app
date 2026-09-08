@@ -11,13 +11,13 @@ const HERO_DATA = {
       "Explore our Granite collection, offering exceptional durability, natural character and refined surfaces.",
   },
 
-  "imported-granite": {
+   exotic: {
     image: "/Hero-image/02.png",
-    eyebrow: "IMPORTED GRANITE COLLECTION",
-    title: "IMPORTED GRANITE",
-    subtitle: "Distinctive stone from around the world.",
+    eyebrow: "EXOTIC COLLECTION",
+    title: "EXOTIC",
+    subtitle: "Rare stone with extraordinary character.",
     description:
-      "Discover carefully selected Imported Granite with unique patterns, rich textures and exceptional character.",
+      "Discover our Exotic collection, featuring distinctive patterns, rich colours and exceptional natural beauty.",
   },
 
   quartz: {
