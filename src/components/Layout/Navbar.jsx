@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ChevronDown, Menu } from "lucide-react";
 import { navLinks, submenuData } from "../Data/NavData";
+import SearchFilter from "./Searchfilter";
 
 const TRANSITION = "duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]";
 
@@ -10,10 +11,9 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
 
   // Detect mobile screen
@@ -26,6 +26,7 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
@@ -44,30 +45,8 @@ const Navbar = () => {
     setActiveSubmenu(null);
   };
 
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-    if (!searchOpen) {
-      // Focus the input when opening
-      setTimeout(() => {
-        const searchInput = document.getElementById("search-input");
-        if (searchInput) searchInput.focus();
-      }, 100);
-    } else {
-      setSearchQuery("");
-    }
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Searching for:", searchQuery);
-      // Navigate to search results or handle search
-      // navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-    }
-  };
-
   const shouldHaveWhiteBackground =
-    !isHomePage || isScrolled || menuOpen || searchOpen;
+    !isHomePage || isScrolled || menuOpen;
 
   return (
     <header
@@ -76,14 +55,13 @@ const Navbar = () => {
         transition-all ${TRANSITION}
         ${
           shouldHaveWhiteBackground
-            // ? "bg-[rgba(255,255,255,0.96)] text-black backdrop-blur-[12px] border-b border-[rgba(0,0,0,0.08)]"
-            ? "bg-[#d10703] text-white backdrop-blur-[12px] "
+            ? "bg-[#d10703] text-white backdrop-blur-[12px]"
             : "bg-transparent text-white"
         }
       `}
       onMouseLeave={() => {
         // Close everything when mouse leaves the header (desktop only)
-        if (!isMobile && !searchOpen) {
+        if (!isMobile) {
           closeMenu();
         }
       }}
@@ -105,7 +83,6 @@ const Navbar = () => {
           to="/"
           onClick={() => {
             closeMenu();
-            setSearchOpen(false);
           }}
           className={`flex items-center leading-none transition-opacity hover:opacity-80 ${isHomePage ? "pt-5" : ""}`}
         >
@@ -119,7 +96,7 @@ const Navbar = () => {
               alt="Vaastu Italian Marble"
               className={`
                 absolute inset-0
-                h-full w-full object-contain
+                h-full w-20 object-contain
                 padding-[4px]
                 transition-all duration-300 ease-out
                 ${isScrolled ? "scale-[0.98] opacity-0" : "scale-100 opacity-100"}
@@ -130,7 +107,7 @@ const Navbar = () => {
               src="/images/logo/logo.jpeg"
               alt="Vaastu Italian Marble"
               className={`
-                absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                absolute top-1/2 left-10 -translate-x-1/2 -translate-y-1/2
                 w-full object-contain
                 transition-all duration-300 ease-out
                 ${isHomePage ? "h-[65%] top-[44%]" : "h-full"}
@@ -140,17 +117,14 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Right side - Search Icon and Menu Button */}
-        <div className="flex items-center gap-4">
-          {/* Search Icon - Expands on click */}
 
-          {/* Menu Button */}
+        {/* Menu Button */}
+        <div className="flex items-center gap-4">
           <button
             type="button"
             onClick={() => {
               setMenuOpen((prev) => !prev);
               setActiveSubmenu(null);
-              setSearchOpen(false);
             }}
             className={`
               flex cursor-pointer
@@ -192,7 +166,6 @@ const Navbar = () => {
           maxHeight: menuOpen ? "calc(100vh - 88px)" : "0",
         }}
         onMouseLeave={() => {
-          // Close submenu when mouse leaves the dropdown (desktop only)
           if (!isMobile) {
             setActiveSubmenu(null);
           }
@@ -225,13 +198,16 @@ const Navbar = () => {
               md:gap-8
             "
           >
+             <div className="w-full flex md:hidden">
+            <SearchFilter onNavigate={navigate} onClose={closeMenu}/>
+            </div>
+
             {navLinks.map(({ label, to, hasSubmenu }) => (
               <div
                 key={label}
                 className="w-full md:relative md:w-auto"
                 onMouseEnter={() => {
                   if (!isMobile) {
-                    // Close submenu when hovering over non-submenu items
                     if (hasSubmenu) {
                       setActiveSubmenu(label);
                     } else {
@@ -259,7 +235,6 @@ const Navbar = () => {
                       md:py-0
                       md:relative
 
-                      // Border bottom only on hover for submenu items
                       md:after:absolute
                       md:after:bottom-[-4px]
                       md:after:left-0
@@ -340,8 +315,6 @@ const Navbar = () => {
                       md:text-neutral-800
 
                       uppercase
-
-                      // No border bottom for regular links
                     `}
                   >
                     {label}
@@ -397,7 +370,7 @@ const Navbar = () => {
                   </div>
                 )}
 
-                {/* Desktop submenu — anchored directly under this item */}
+                {/* Desktop submenu */}
                 {hasSubmenu && submenuData[label] && (
                   <div
                     className={`
@@ -510,81 +483,9 @@ const Navbar = () => {
               Store Locator
             </Link>
 
-            {/* SEARCH */}
-            <div className="flex w-full items-center py-3.5 md:w-auto md:justify-center md:py-0">
-              {!searchOpen ? (
-                <button
-                  type="button"
-                  onClick={toggleSearch}
-                  className="p-1 text-neutral-800 transition-opacity hover:opacity-60"
-                  aria-label="Search"
-                >
-                  <Search size={20} />
-                </button>
-              ) : (
-                <form
-                  onSubmit={handleSearchSubmit}
-                  className="flex items-center gap-2"
-                >
-                  <div className="relative flex items-center">
-                    <Search
-                      size={18}
-                      className="absolute left-2 text-neutral-400"
-                    />
-                    <input
-                      id="search-input"
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search products..."
-                      className={`
-                      w-40 sm:w-56 md:w-64
-                      border border-neutral-300
-                      rounded-full
-                      bg-white
-                      pl-8 pr-4 py-1.5
-                      text-sm
-                      text-neutral-800
-                      outline-none
-                      transition-all ${TRANSITION}
-                      focus:border-[#806c5d]
-                      focus:shadow-md
-                    `}
-                      autoFocus
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="
-                    px-3 py-1.5
-                    text-xs
-                    font-medium
-                    tracking-wider
-                    text-white
-                    bg-[#806c5d]
-                    rounded-full
-                    transition-all
-                    hover:bg-[#6b5a4d]
-                    hover:scale-105
-                  "
-                  >
-                    Search
-                  </button>
-                  <button
-                    type="button"
-                    onClick={toggleSearch}
-                    className="
-                    p-1
-                    transition-opacity
-                    hover:opacity-60
-                    text-neutral-600
-                  "
-                    aria-label="Close search"
-                  >
-                    <X size={18} />
-                  </button>
-                </form>
-              )}
+            {/* Desktop Search Filter */}
+            <div className="hidden md:flex">
+            <SearchFilter onNavigate={navigate} onClose={closeMenu}/>
             </div>
           </nav>
         </div>
