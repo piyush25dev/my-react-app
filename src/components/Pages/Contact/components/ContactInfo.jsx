@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Link, Typography } from "@mui/material";
 import { contactData } from "../../../Data/contactData";
+import { ArrowUpRight } from "lucide-react";
+
 import { Icon } from "@iconify/react";
 
 const ContactInfo = () => {
@@ -29,7 +31,7 @@ const ContactInfo = () => {
             xs: "30px",
             md: "25px",
           },
-          p: {xs: 2, md: 0},
+          p: { xs: 2, md: 0 },
         }}
       >
         <Typography
@@ -87,7 +89,7 @@ const ContactInfo = () => {
           }}
         >
           Explore our exclusive collection of marbles and granites at our
-          showrooms in Hyderabad.<br/> Our team will be happy to assist you.
+          showrooms in Hyderabad.<br /> Our team will be happy to assist you.
         </Typography>
       </Box>
 
@@ -106,7 +108,7 @@ const ContactInfo = () => {
             md: "25px",
           },
           width: "100%",
-          p: {xs: 2, md: 0}
+          p: { xs: 2, md: 0 }
         }}
       >
         {contactData.offices.map((office) => (
@@ -209,7 +211,6 @@ const ContactInfo = () => {
                   >
                     {office.company}
                   </Typography>
-
                   <Typography
                     sx={{
                       mt: "1px",
@@ -230,6 +231,18 @@ const ContactInfo = () => {
                       </React.Fragment>
                     ))}
                   </Typography>
+                  <a
+                    href={office.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/link inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.25em] text-[#8a7358] transition-colors duration-300 hover:text-[#1a1a1a]"
+                  >
+                    GET DIRECTIONS
+                    <ArrowUpRight
+                      size={13}
+                      className="transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5"
+                    />
+                  </a>
                 </Box>
               </Box>
             </Box>
@@ -252,7 +265,7 @@ const ContactInfo = () => {
             xs: "35px",
             md: "38px",
           },
-          p: {xs: 2, md: 0}
+          p: { xs: 2, md: 0 }
         }}
       >
         {/* EMAIL */}

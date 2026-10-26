@@ -26,7 +26,7 @@ const OurStores = () => {
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <img
-                  src={index === 0 ? "/images/about/shop.png" :"/images/background/hero.png"}
+                  src={store.image}
                   alt={`Vaastu showroom - ${store.name}`}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
