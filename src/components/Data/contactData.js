@@ -4,7 +4,7 @@ export const contactData = {
   offices: [
     {
       title: "Showroom - Karmanghat",
-      image: "/images/contact/karmanghat.png",
+      image: "/images/about/shop.png",
       company: "Vaastu Marble & Granites Pvt.Ltd",
       address: [
         "Opposite to Ayyappa Temple,",
@@ -12,11 +12,12 @@ export const contactData = {
         "Hyderabad - 500079",
         "Telangana, India",
       ],
+       mapUrl: "https://maps.app.goo.gl/TVdry3VT6aRUpR6C7",
     },
 
     {
       title: "Showroom - Shamshabad",
-      image: "/images/contact/shamshabad.png",
+      image: "/images/background/hero.png",
       company: "Vaastu Marble & Granites Pvt.Ltd",
       address: [
         "National Highway 44,",
@@ -24,6 +25,7 @@ export const contactData = {
         "Telangana - 501218",
         "India",
       ],
+      mapUrl: "https://maps.app.goo.gl/au8hDofRdzx5a6Xg6",
     },
   ],
 
