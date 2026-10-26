@@ -9,7 +9,7 @@ const Intro = () => {
           className="relative h-[46vh] w-full overflow-hidden md:h-[70vh] md:w-1/2"
         >
           <img
-            src="/images/about/girish.png"
+            src="/images/about/JL.png"
             alt="Natural stone blocks at the Vaastu quarry"
             className="h-full w-full object-cover"
           />
