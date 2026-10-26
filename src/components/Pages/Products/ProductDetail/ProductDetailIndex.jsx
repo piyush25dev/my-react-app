@@ -56,7 +56,7 @@ const ProductDetailIndex = () => {
   const handleWhatsAppEnquiry = () => {
     const productUrl = `${window.location.origin}${location.pathname}`;
 
-    const message = `Hi, I am interested in your product from your *Online Store* - *${product.name}*. Quantity: *1* Product Link: ${productUrl} Please provide more details.`;
+    const message = `Hi, I am interested in your product from your *Online Store* - *${product.name}*. Product Link: ${productUrl} Please provide more details.`;
 
     const whatsappUrl = `https://wa.me/919414109808?text=${encodeURIComponent(
       message,
