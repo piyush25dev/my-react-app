@@ -34,7 +34,7 @@ const StoneCard = ({ product, index = 0 }) => {
 
     const productUrl = `${window.location.origin}/products/${productSlug}`;
 
-    const message = `Hi, I am interested in your product from your *Online Store* - *${product.name}*. Quantity: *1* Product Link: ${productUrl} Please provide more details.`;
+    const message = `Hi, I am interested in your product from your *Online Store* - *${product.name}*. Product Link: ${productUrl} Please provide more details.`;
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
       message,
